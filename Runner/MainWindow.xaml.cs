@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Runner.ViewModels;
 
 namespace Runner
 {
@@ -24,15 +25,15 @@ namespace Runner
         public MainWindow()
         {
             InitializeComponent();
+            MainViewModel viewModel = new MainViewModel();
+            DataContext = viewModel;
+
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Process process = new Process();
-            process.StartInfo.FileName = "notepad.exe";
-            process.StartInfo.WorkingDirectory = @"c:\Temp";
-            process.StartInfo.Arguments = "somefile.txt";
-            process.Start();
+            
+            
         }
     }
 }

@@ -6,10 +6,19 @@
         xmlns:local="clr-namespace:Runner"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+
     <Grid>
      <StackPanel>
         <Button Click="ButtonBase_OnClick" Content="Run"/>
-        <ComboBox />
-      </StackPanel> 
+      
+                        <ListBox ItemsSource="{Binding Commands}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+            
+        </StackPanel> 
     </Grid>
 </Window>
