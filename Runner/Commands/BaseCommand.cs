@@ -13,12 +13,12 @@ namespace Runner.Commands
 
         public virtual bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public virtual void Execute(object parameter)
         {
-            throw new NotImplementedException();
+         
         }
     }
 }

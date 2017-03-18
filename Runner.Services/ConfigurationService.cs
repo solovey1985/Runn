@@ -17,10 +17,20 @@ namespace Runner.Services
             throw new NotImplementedException();
         }
 
-        public TaskConfiguration ReadConfigurationFromFile(string path)
+        public override void PostRun(TaskConfiguration taskConfig)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void PreRun(TaskConfiguration taskConfig)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TaskConfiguration> ReadConfigurationFromFile(string path)
         {
             string configStr = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<TaskConfiguration>(configStr);
+            return JsonConvert.DeserializeObject<List<TaskConfiguration>>(configStr);
         }
     }
 }

@@ -1,27 +1,28 @@
-﻿using System;
+﻿using Runner.Services.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Runner.Services;
 namespace Runner.Commands
 {
     public class RunCommand:BaseCommand
     {
+        private SimpleTaskService taskRunner;
         public string  CommandLine { get; set; }
-
+        public TaskConfiguration TaskConfiguration { get; set; }
+        public RunCommand()
+        {
+            taskRunner = new SimpleTaskService();
+        }
         public override void Execute(object parameter)
         {
-            base.Execute(parameter);
-            CommandLine = (string)parameter;
-            ProcessStartInfo processInfo = new ProcessStartInfo();
-            processInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            processInfo.FileName = "cmd.exe";
-            processInfo.WorkingDirectory = Path.GetDirectoryName(CommandLine);
-            processInfo.Arguments = "/c START " + Path.GetFileName(CommandLine);
-            Process.Start(processInfo);
+            TaskConfiguration current = (TaskConfiguration)parameter;
+            if (current != null)
+            taskRunner.Run(current);
         }
     }
 }

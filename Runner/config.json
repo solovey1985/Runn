@@ -1,0 +1,7 @@
+﻿[{
+  "Id": 0,
+  "Name": "Test copy before build",
+  "Description": "Simple test",
+  "PathToFile": "E:\\Runner\\Run.cmd",
+  "Parameters": ["first","second"]
+}]

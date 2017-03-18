@@ -13,7 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using System.Management.Automation;
+using System.Management.Automation.Runspaces;
 using Runner.ViewModels;
+using Runner.Services.Models;
 
 namespace Runner
 {
@@ -28,12 +32,6 @@ namespace Runner
             MainViewModel viewModel = new MainViewModel();
             DataContext = viewModel;
 
-        }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            
-            
         }
     }
 }

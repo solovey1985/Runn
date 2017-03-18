@@ -5,28 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Runner.Commands;
+using Runner.Services.Models;
+using Runner.Services;
 
 namespace Runner.ViewModels
 {
     public class MainViewModel:BaseViewModel
     {
+        ConfigurationService configService;
+       
         public MainViewModel()
         {
-            CommandDictionary = new Dictionary<string, string>();
-            CommandDictionary.Add("Build", "sdf");   
-            CommandDictionary.Add("DbMigration", "DBMigrationPath");   
-            CommandDictionary.Add("Depploy", "DeployCommandPath");   
-             
-            Commands = new List<string>();
-            Commands.Add("Build");
-            Commands.Add("DbMigration");
-            Commands.Add("Depploy");
+            configService = new ConfigurationService();
+            Configurations = configService.ReadConfigurationFromFile("config.json");
+            RunCommand = new RunCommand();
+         
         }
 
-        public Dictionary <string,string>  CommandDictionary { get; set; }
-        public List<string> Commands { get; set; }
-        public string CurrentCommand { get; set; }
-        
+        public List<TaskConfiguration> Configurations { get; set; }
+        public TaskConfiguration CurrentCommand { get; set; }
         public RunCommand RunCommand { get; set; } 
         
     

@@ -9,14 +9,14 @@
 
     <Grid>
      <StackPanel>
-        <Button Click="ButtonBase_OnClick" Content="Run"/>
+            <Button Command="{Binding RunCommand}" CommandParameter="{Binding ElementName=CommandsList, Path=SelectedItem}" Content="Run"/>
       
-                        <ListBox ItemsSource="{Binding Commands}">
+                        <ListBox Name="CommandsList" ItemsSource="{Binding  Configurations}">
                             <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}"/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
                         </ListBox>
             
         </StackPanel> 
