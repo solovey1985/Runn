@@ -118,7 +118,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy  "E:\Repositories\Runner\Runner\config.json"  "E:\Repositories\Runner\Runner\bin\Debug"  /Y</PreBuildEvent>
+    <PreBuildEvent>xcopy  "$(ProjectDir)config.json"  "$(TargetDir)"  /Y</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
