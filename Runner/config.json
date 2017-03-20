@@ -14,6 +14,14 @@
     "Parameters": [ "force" ],
     "PathToFile": "c:\\Projects\\GroupM\\Scripts\\DbMigrations.ps1",
     "PathToUtil": "powershell.exe"
+  },
+  {
+    "Description": "Powershel Test",
+    "Id": 1,
+    "Name": "PS test",
+    "Parameters": [ "" ],
+    "PathToFile": "E:\\Runner\\test.ps1",
+    "PathToUtil": "powershell.exe"
   }
 
 ]
