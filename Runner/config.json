@@ -4,25 +4,16 @@
     "Id": 0,
     "Name": "Build project",
     "Parameters": [ "Defualt " ],
-    "PathToFile": "E:\\Runner\\Run.cmd",
+    "PathToFile": "c:\\Projects\\GroupM\\BC\\Build.cmd",
     "PathToUtil": "cmd.exe"
   },
   {
-    "Description": "Another task from different directory",
-    "Id": 0,
-    "Name": "Test from another dir",
-    "Parameters": [ "Defualt " ],
-    "PathToFile": "E:\\Runner_2\\Run.cmd",
-    "PathToUtil": "cmd.exe"
-  },
-    {
-    "Description": "Simple test",
-    "Id": 0,
-    "Name": "Test copy before build",
-    "Parameters": [ "Defualt " ],
-    "PathToFile": "E:\\Runner\\Run.cmd",
-    "PathToUtil": "cmd.exe"
+    "Description": "DbMigration",
+    "Id": 1,
+    "Name": "DbMigration",
+    "Parameters": [ "force" ],
+    "PathToFile": "c:\\Projects\\GroupM\\Scripts\\DbMigrations.ps1",
+    "PathToUtil": "powershell.exe"
   }
-
 
 ]

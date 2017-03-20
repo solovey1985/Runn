@@ -11,18 +11,25 @@ namespace Runner.Commands
 {
     public class RunCommand:BaseCommand
     {
-        private SimpleTaskService taskRunner;
+        private BaseService taskRunner;
         public string  CommandLine { get; set; }
         public TaskConfiguration TaskConfiguration { get; set; }
         public RunCommand()
         {
-            taskRunner = new SimpleTaskService();
+            
         }
         public override void Execute(object parameter)
         {
             TaskConfiguration current = (TaskConfiguration)parameter;
             if (current != null)
-            taskRunner.Run(current);
+                switch (current.PathToUtil)
+                {
+                    case "cmd.exe": {  taskRunner = new SimpleTaskService(); break;}
+                    case "powershell.exe": {  taskRunner = new PowerShellService(); break;}
+                    default: { taskRunner = new SimpleTaskService(); break; }
+
+                }
+                taskRunner.Run(current);
         }
     }
 }

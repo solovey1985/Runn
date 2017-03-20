@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Runner.Services.Models;
+using System.Management.Automation;
+using System.Collections.ObjectModel;
+using System.Management.Automation.Runspaces;
+
+namespace Runner.Services
+{
+    public class PowerShellService : BaseService
+    {
+        public override bool Run(TaskConfiguration taskConfig)
+        {
+            RunspaceConfiguration runspaceConfiguration = RunspaceConfiguration.Create();
+            Runspace runspace = RunspaceFactory.CreateRunspace(runspaceConfiguration);
+            runspace.Open();
+            
+            RunspaceInvoke scriptInvoker = new RunspaceInvoke(runspace);
+            Pipeline pipeline = runspace.CreatePipeline();
+
+            Command myCommand = new Command(taskConfig.PathToFile, true);
+
+            string force = taskConfig.Parameters.First(p => p.Contains("force"));
+            if (force != null)
+            {
+                CommandParameter param = new CommandParameter("-f");
+                myCommand.Parameters.Add(param);
+
+            }
+            pipeline.Commands.Add(myCommand);
+
+            var results = pipeline.Invoke();
+               
+            return results.Count > 0;
+        }
+
+        public override void PostRun(TaskConfiguration taskConfig)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void PreRun(TaskConfiguration taskConfig)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

@@ -20,7 +20,7 @@ namespace Runner.Services
             info.WorkingDirectory = Path.GetDirectoryName(taskConfig.PathToFile);
             Debug.Write(info.WorkingDirectory);
             //Appereance
-            info.WindowStyle = ProcessWindowStyle.Maximized;
+            info.WindowStyle = ProcessWindowStyle.Hidden;
             info.UseShellExecute = false;
             info.CreateNoWindow = true;
             info.RedirectStandardError = true;
