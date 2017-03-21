@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Runner.App_Start;
 
 namespace Runner
 {
@@ -13,5 +14,9 @@ namespace Runner
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            AutofacConfig.Configure();
+        }
     }
 }

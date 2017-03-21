@@ -18,5 +18,8 @@ namespace Runner.Services.Models
         public string PathToFile { get; set; }
         public string PathToUtil { get; set; }
         public string[] Parameters { get; set; }
+        public string Password { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; internal set; }
     }
 }

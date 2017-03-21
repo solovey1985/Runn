@@ -30,6 +30,7 @@ namespace Runner.Commands
                 {
                     case "cmd.exe": {  taskRunner = new SimpleTaskService(); break;}
                     case "powershell.exe": {  taskRunner = new PowerShellService(); break;}
+                    case "git.exe": {  taskRunner = new GitService(); break;}
                     default: { taskRunner = new SimpleTaskService(); break; }
 
                 }

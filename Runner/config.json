@@ -17,11 +17,23 @@
   },
   {
     "Description": "Powershel Test",
-    "Id": 1,
+    "Id": 2,
     "Name": "PS test",
     "Parameters": [ "" ],
     "PathToFile": "E:\\Runner\\test.ps1",
     "PathToUtil": "powershell.exe"
+  },
+  {
+    "Description": "Git test",
+    "Id": 3,
+    "Name": "Get test",
+    "Parameters": [ "" ],
+    "PathToFile": "d:\\Repositories\\DriveMeApps\\",
+    "PathToUtil": "git.exe",
+    "UserName": "solovey1985@ukr.net",
+    "Password": "Dhjnvytyjub15",
+    "Email": "solovey1985@ukr.net"
   }
+
 
 ]
