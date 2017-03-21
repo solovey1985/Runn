@@ -14,12 +14,13 @@ namespace Runner.Commands
 {
     public class RunCommand:BaseCommand
     {
-        private INotificationDialogService _dialogService = new NotificationDialogService();
+        private NotificationDialogService _dialogService;
         private BaseService taskRunner;
         public string  CommandLine { get; set; }
         public TaskConfiguration TaskConfiguration { get; set; }
         public RunCommand()
         {
+            _dialogService = new NotificationDialogService();
             
         }
         public override void Execute(object parameter)
@@ -35,7 +36,8 @@ namespace Runner.Commands
 
                 }
                 taskRunner.Run(current);
-                _dialogService.ShowNotificationWindow(new Notification {Title="Task done", Message=current.Description});
+                
+                
         }
     }
 }

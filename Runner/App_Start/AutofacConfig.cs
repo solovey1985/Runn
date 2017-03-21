@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Autofac;
-using Autofac.Core.Registration;
+using System.Reflection;
+using System.IO;
+using System.Windows;
 
 namespace Runner.App_Start
 {
@@ -12,8 +13,8 @@ namespace Runner.App_Start
     {
         public static void Configure()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterAssemblyTypes();
+         
+          
         }
     }
 }

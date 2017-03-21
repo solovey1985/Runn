@@ -15,16 +15,17 @@ namespace Runner.Services
         {
             using (var repo = new Repository(taskConfig.PathToFile))
             {
-                LibGit2Sharp.PullOptions options = new LibGit2Sharp.PullOptions();
-                options.FetchOptions = new FetchOptions();
-                options.FetchOptions.CredentialsProvider = new CredentialsHandler(
+                LibGit2Sharp.PushOptions options = new LibGit2Sharp.PushOptions();
+               
+                options.CredentialsProvider = new CredentialsHandler(
                     (url, usernameFromUrl, types) =>
                         new UsernamePasswordCredentials()
                         {
                             Username = taskConfig.UserName,
                             Password = taskConfig.Password
                         });
-                repo.Network.Pull(new LibGit2Sharp.Signature(taskConfig.UserName, taskConfig.Email, new DateTimeOffset(DateTime.Now)), options);
+                var remote = repo.Network.Remotes["origin"];
+                repo.Network.Push(remote, @"refs/heads/master", options);
                 return true;
             }
             

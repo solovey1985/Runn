@@ -14,9 +14,6 @@ namespace Runner
     /// </summary>
     public partial class App : Application
     {
-        public App()
-        {
-            AutofacConfig.Configure();
-        }
+        
     }
 }
