@@ -24,6 +24,8 @@
     "PathToUtil": "powershell.exe"
   },
   {
+    "Branch": "master",
+    "Operation":  1,
     "Description": "Git test",
     "Id": 3,
     "Name": "Get test",

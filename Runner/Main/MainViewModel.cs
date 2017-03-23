@@ -16,14 +16,14 @@ namespace Runner.ViewModels
        
         public MainViewModel()
         {
-            configService = new ConfigurationService();
-            Configurations = configService.ReadConfigurationFromFile("config.json");
+            configService = new ConfigurationService("config.json");
+            Configurations = configService.ReadConfigurationFromFile();
             RunCommand = new RunCommand();
          
         }
 
-        public List<TaskConfiguration> Configurations { get; set; }
-        public TaskConfiguration CurrentCommand { get; set; }
+        public List<Services.Models.TaskConfig> Configurations { get; set; }
+        public Task CurrentCommand { get; set; }
         public RunCommand RunCommand { get; set; } 
         
     

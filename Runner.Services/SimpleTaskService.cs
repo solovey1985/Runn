@@ -9,12 +9,12 @@ namespace Runner.Services
 {
     public class SimpleTaskService : BaseService
     {
-        public override void PostRun(TaskConfiguration taskConfig)
+        public override void PostRun(Models.TaskConfig taskConfig)
         {
             
         }
 
-        public override void PreRun(TaskConfiguration taskConfig)
+        public override void PreRun(Models.TaskConfig taskConfig)
         {
             
         }

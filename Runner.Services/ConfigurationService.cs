@@ -11,26 +11,38 @@ namespace Runner.Services
 {
     public class ConfigurationService: BaseService, IDisposable
     {
-        
+        string _path;
+        public ConfigurationService (string path)
+        {
+            _path = path;
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();
         }
 
-        public override void PostRun(TaskConfiguration taskConfig)
+        public override void PostRun(Models.TaskConfig taskConfig)
         {
             throw new NotImplementedException();
         }
 
-        public override void PreRun(TaskConfiguration taskConfig)
+        public override void PreRun(Models.TaskConfig taskConfig)
         {
             throw new NotImplementedException();
         }
 
-        public List<TaskConfiguration> ReadConfigurationFromFile(string path)
+        public List<Models.TaskConfig> ReadConfigurationFromFile()
         {
-            string configStr = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<List<TaskConfiguration>>(configStr);
+            string configStr = File.ReadAllText(_path);
+            return JsonConvert.DeserializeObject<List<TaskConfig>>(configStr);
+        }
+
+        public T GetTaskById<T>(int id) where T : TaskConfig
+            {
+            string configStr = File.ReadAllText(_path);
+            List<T> configs =  JsonConvert.DeserializeObject<List<T>>(configStr);
+            return (T)configs.FirstOrDefault(c => c.Id==id);
         }
     }
 }

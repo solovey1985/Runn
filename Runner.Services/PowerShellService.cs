@@ -13,7 +13,7 @@ namespace Runner.Services
 {
     public class PowerShellService : BaseService
     {
-        public override bool Run(TaskConfiguration taskConfig)
+        public override bool Run(Models.TaskConfig taskConfig)
         {
             RunspaceConfiguration runspaceConfiguration = RunspaceConfiguration.Create();
             Runspace runspace = RunspaceFactory.CreateRunspace(runspaceConfiguration);
@@ -44,12 +44,12 @@ namespace Runner.Services
             return results.Count > 0;
         }
 
-        public override void PostRun(TaskConfiguration taskConfig)
+        public override void PostRun(Models.TaskConfig taskConfig)
         {
             throw new NotImplementedException();
         }
 
-        public override void PreRun(TaskConfiguration taskConfig)
+        public override void PreRun(Models.TaskConfig taskConfig)
         {
             throw new NotImplementedException();
         }

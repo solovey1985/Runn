@@ -11,32 +11,35 @@ namespace Runner.Services
 {
     public class GitService : BaseService
     {
-        public override bool Run(TaskConfiguration taskConfig)
+        public override bool Run(Models.TaskConfig taskConfig)
         {
+            GitTask config = taskConfig as GitTask;
+            if(config != null)
             using (var repo = new Repository(taskConfig.PathToFile))
             {
-                LibGit2Sharp.PushOptions options = new LibGit2Sharp.PushOptions();
+                PushOptions options = new PushOptions();
                
                 options.CredentialsProvider = new CredentialsHandler(
                     (url, usernameFromUrl, types) =>
                         new UsernamePasswordCredentials()
                         {
-                            Username = taskConfig.UserName,
-                            Password = taskConfig.Password
+                            Username = config.UserName,
+                            Password = config.Password
                         });
                 var remote = repo.Network.Remotes["origin"];
                 repo.Network.Push(remote, @"refs/heads/master", options);
                 return true;
             }
+            return false;
             
         }
-
-        public override void PostRun(TaskConfiguration taskConfig)
+        
+        public override void PostRun(Models.TaskConfig taskConfig)
         {
             
         }
 
-        public override void PreRun(TaskConfiguration taskConfig)
+        public override void PreRun(Models.TaskConfig taskConfig)
         {
             
         }

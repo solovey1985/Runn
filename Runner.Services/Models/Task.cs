@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Runner.Services.Models
 {
-    public abstract class Entity
-    {
-    }
-
-    public class TaskConfiguration : Entity
+    
+    public class TaskConfig
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,8 +15,5 @@ namespace Runner.Services.Models
         public string PathToFile { get; set; }
         public string PathToUtil { get; set; }
         public string[] Parameters { get; set; }
-        public string Password { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-    }
+   }
 }
