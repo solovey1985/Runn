@@ -21,7 +21,7 @@ namespace Runner.Services.Test
         [OneTimeSetUp]
         public void Init()
         {
-            configService = new ConfigurationService();
+            configService = new ConfigurationService("config.json");
         }
 
         [OneTimeTearDown]

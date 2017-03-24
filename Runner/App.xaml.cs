@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Runner.App_Start;
+using Microsoft.Practices.Unity;
 
 namespace Runner
 {
@@ -14,6 +15,8 @@ namespace Runner
     /// </summary>
     public partial class App : Application
     {
+        private IUnityContainer container;
+    
         
     }
 }
