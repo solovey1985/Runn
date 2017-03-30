@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace Runner.Services
 {
-    public class PowerShellService : BaseService
+    public class PowerShellService : BaseService, IPowerShellService
     {
         public override bool Run(Models.TaskConfig taskConfig)
         {

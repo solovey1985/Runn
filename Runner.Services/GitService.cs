@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 using LibGit2Sharp;
 using Runner.Services.Models;
 using LibGit2Sharp.Handlers;
+using Runner.Services;
 
 namespace Runner.Services
 {
-    public class GitService : BaseService
+    
+
+    public class GitService : BaseService, IGitService
     {
         public override bool Run(Models.TaskConfig taskConfig)
         {

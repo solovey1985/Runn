@@ -15,7 +15,14 @@ namespace Runner
     /// </summary>
     public partial class App : Application
     {
-        private IUnityContainer container;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var container = UnityConfig.Configure();
+            var mainWindow = container.Resolve<MainWindow>();
+            Application.Current.MainWindow = mainWindow;
+            Application.Current.MainWindow.Show();
+        }
     
         
     }

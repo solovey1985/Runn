@@ -72,6 +72,7 @@
     <Compile Include="BaseService.cs" />
     <Compile Include="ConfigurationService.cs" />
     <Compile Include="GitService.cs" />
+    <Compile Include="IBaseService.cs" />
     <Compile Include="Models\GitTask.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="PowerShellService.cs" />

@@ -7,7 +7,9 @@ using Runner.Services.Models;
 
 namespace Runner.Services
 {
-    public class SimpleTaskService : BaseService
+   
+
+    public class SimpleTaskService : BaseService, ISimpleTaskService
     {
         public override void PostRun(Models.TaskConfig taskConfig)
         {

@@ -91,7 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="App_Start\AutofacConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Main\RunCommand.cs" />
     <Compile Include="1_Framework\BaseViewModel.cs" />
     <Compile Include="Main\MainViewModel.cs" />

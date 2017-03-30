@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Runner.Services
 {
-    public abstract class BaseService
+    public abstract class BaseService : IBaseService
     {
         public virtual bool Run(Models.TaskConfig taskConfig)
         {
