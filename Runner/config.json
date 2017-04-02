@@ -25,16 +25,16 @@
   },
   {
     "Branch": "master",
-    "Operation":  1,
     "Description": "Git test",
+    "Email": "solovey1985@ukr.net",
     "Id": 3,
     "Name": "Get test",
+    "Operation": 1,
     "Parameters": [ "" ],
+    "Password": "Dhjnvytyjub15",
     "PathToFile": "E:\\Repositories\\Runner\\",
     "PathToUtil": "git.exe",
-    "UserName": "solovey1985@ukr.net",
-    "Password": "Dhjnvytyjub15",
-    "Email": "solovey1985@ukr.net"
+    "UserName": "solovey1985@ukr.net"
   }
 
 

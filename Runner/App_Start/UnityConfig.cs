@@ -18,13 +18,9 @@ namespace Runner.App_Start
             IUnityContainer container = new UnityContainer();
             container.RegisterType<IGitService, GitService>();
             container.RegisterType<ISimpleTaskService, SimpleTaskService>();
-            foreach (var t in typeof(BaseService).Assembly.GetExportedTypes())
-            {
-                if (typeof(IBaseService).IsAssignableFrom(t))
-                {
-                    container.RegisterType(typeof(IBaseService), t, t.FullName);
-                }
-            }
+            container.RegisterType<IConfigurationService, ConfigurationService>();
+            container.RegisterType<IPowerShellService, PowerShellService>();
+     
             return container;
         }
     }

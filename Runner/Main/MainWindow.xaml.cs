@@ -26,11 +26,11 @@ namespace Runner
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
-            MainViewModel viewModel = new MainViewModel();
-            DataContext = viewModel;
+            MainViewModel _viewModel = viewModel; 
+            DataContext = _viewModel;
 
         }
     }

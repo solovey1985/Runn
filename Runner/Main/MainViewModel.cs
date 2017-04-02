@@ -12,18 +12,17 @@ namespace Runner.ViewModels
 {
     public class MainViewModel:BaseViewModel
     {
-        ConfigurationService configService;
+        IConfigurationService _configService;
        
-        public MainViewModel()
+        public MainViewModel(IConfigurationService configService, RunCommand command)
         {
-            configService = new ConfigurationService("config.json");
-            Configurations = configService.ReadConfigurationFromFile();
-            RunCommand = new RunCommand();
+            _configService = configService;
+            Configurations = _configService.ReadConfigurationFromFile("config.json");
+            RunCommand = command;
          
         }
 
         public List<Services.Models.TaskConfig> Configurations { get; set; }
-        public Task CurrentCommand { get; set; }
         public RunCommand RunCommand { get; set; } 
         
     

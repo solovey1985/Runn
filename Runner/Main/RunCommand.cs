@@ -16,13 +16,13 @@ namespace Runner.Commands
     {
         private NotificationDialogService _dialogService;
         private BaseService taskRunner;
-        private ConfigurationService configService;
+        private IConfigurationService _configService;
         public Task TaskConfiguration { get; set; }
-        public RunCommand()
+        public RunCommand(IConfigurationService configService)
         {
             _dialogService = new NotificationDialogService();
-            configService = new ConfigurationService("config.json");
-            
+            _configService = configService;
+            _configService.Path = "config.json";
 
         }
         public override void Execute(object parameter)
@@ -34,7 +34,7 @@ namespace Runner.Commands
                     case "cmd.exe": {  taskRunner = new SimpleTaskService(); break;}
                     case "powershell.exe": {  taskRunner = new PowerShellService(); break;}
                     case "git.exe": {  taskRunner = new GitService();
-                            GitTask gitTask =  configService.GetTaskById<GitTask>(current.Id);
+                            GitTask gitTask =  _configService.GetTaskById<GitTask>(current.Id);
                             taskRunner.Run(gitTask);
                             return;
                             }

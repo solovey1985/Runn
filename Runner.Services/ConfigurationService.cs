@@ -9,13 +9,24 @@ using Runner.Services.Models;
 
 namespace Runner.Services
 {
-    public class ConfigurationService: BaseService, IDisposable
+    public class ConfigurationService : BaseService, IDisposable, IConfigurationService
     {
         string _path;
-        public ConfigurationService (string path)
+
+        public string Path
         {
-            _path = path;
+            get
+            {
+                return _path;
+            }
+
+            set
+            {
+                _path = value;
+            }
         }
+
+        public ConfigurationService(){}
 
         public void Dispose()
         {
@@ -32,15 +43,16 @@ namespace Runner.Services
             throw new NotImplementedException();
         }
 
-        public List<Models.TaskConfig> ReadConfigurationFromFile()
+        public List<Models.TaskConfig> ReadConfigurationFromFile(string path)
         {
-            string configStr = File.ReadAllText(_path);
+            Path = path;
+            string configStr = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<List<TaskConfig>>(configStr);
         }
 
         public T GetTaskById<T>(int id) where T : TaskConfig
             {
-            string configStr = File.ReadAllText(_path);
+            string configStr = File.ReadAllText(Path);
             List<T> configs =  JsonConvert.DeserializeObject<List<T>>(configStr);
             return (T)configs.FirstOrDefault(c => c.Id==id);
         }
