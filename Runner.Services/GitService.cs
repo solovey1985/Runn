@@ -14,9 +14,13 @@ namespace Runner.Services
 
     public class GitService : BaseService, IGitService
     {
-        public override bool Run(Models.TaskConfig taskConfig)
+        public GitTask CurrentTask { get; set; }
+        
+        public override bool Run(TaskConfig taskConfig)
         {
             GitTask config = taskConfig as GitTask;
+            if (config == null)
+                config = CurrentTask;
             if(config != null)
             using (var repo = new Repository(taskConfig.PathToFile))
             {
@@ -37,6 +41,8 @@ namespace Runner.Services
             
         }
         
+        
+
         public override void PostRun(Models.TaskConfig taskConfig)
         {
             

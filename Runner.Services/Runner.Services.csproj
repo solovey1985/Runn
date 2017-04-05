@@ -74,10 +74,13 @@
     <Compile Include="GitService.cs" />
     <Compile Include="IBaseService.cs" />
     <Compile Include="Models\GitTask.cs" />
-    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TaskConfig.cs" />
     <Compile Include="PowerShellService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleTaskService.cs" />
+    <Compile Include="WorkflowService.cs" />
+    <Compile Include="Workflows\GitWorkflow.cs" />
+    <Compile Include="Workflows\Workflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

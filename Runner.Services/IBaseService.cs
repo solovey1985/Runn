@@ -24,4 +24,7 @@ namespace Runner.Services
         T GetTaskById<T>(int id) where T : TaskConfig;
         List<TaskConfig> ReadConfigurationFromFile(string path);
     }
+    public interface IWorkflowService
+    {
+    }
 }

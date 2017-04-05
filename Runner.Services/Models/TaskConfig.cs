@@ -15,5 +15,15 @@ namespace Runner.Services.Models
         public string PathToFile { get; set; }
         public string PathToUtil { get; set; }
         public string[] Parameters { get; set; }
+
+        public bool Validate()
+        {
+            bool result = true;
+            if (String.IsNullOrEmpty(PathToFile) || String.IsNullOrEmpty(PathToUtil))
+            {
+                result = false;
+            }
+            return result;
+        }
    }
 }

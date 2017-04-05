@@ -12,35 +12,29 @@ namespace Runner.Services
     public class ConfigurationService : BaseService, IDisposable, IConfigurationService
     {
         string _path;
-
+   
         public string Path
         {
-            get
-            {
-                return _path;
-            }
-
-            set
-            {
-                _path = value;
-            }
+            get{ return _path; }
+            set{ _path = value; }
         }
 
         public ConfigurationService(){}
+   
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+           
         }
 
         public override void PostRun(Models.TaskConfig taskConfig)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void PreRun(Models.TaskConfig taskConfig)
         {
-            throw new NotImplementedException();
+           
         }
 
         public List<Models.TaskConfig> ReadConfigurationFromFile(string path)

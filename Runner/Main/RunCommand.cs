@@ -17,7 +17,7 @@ namespace Runner.Commands
         private NotificationDialogService _dialogService;
         private BaseService taskRunner;
         private IConfigurationService _configService;
-        public Task TaskConfiguration { get; set; }
+       
         public RunCommand(IConfigurationService configService)
         {
             _dialogService = new NotificationDialogService();
