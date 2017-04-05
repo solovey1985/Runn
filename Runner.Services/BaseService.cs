@@ -16,11 +16,14 @@ namespace Runner.Services
             PreRun(taskConfig);
             ProcessStartInfo info = new ProcessStartInfo();
             info.FileName = taskConfig.PathToUtil;
-            info.Arguments = "/c START " + taskConfig.PathToFile;
-            info.WorkingDirectory = Path.GetDirectoryName(taskConfig.PathToFile);
+            if (!string.IsNullOrEmpty(taskConfig.PathToFile))
+            {
+                info.Arguments = $"/c START {taskConfig.PathToFile}";
+                info.WorkingDirectory = Path.GetDirectoryName(taskConfig.PathToFile);
+            }
             Debug.Write(info.WorkingDirectory);
             //Appereance
-            info.WindowStyle = ProcessWindowStyle.Hidden;
+            info.WindowStyle = ProcessWindowStyle.Normal;
             info.UseShellExecute = false;
             info.CreateNoWindow = true;
             info.RedirectStandardError = true;
@@ -29,7 +32,7 @@ namespace Runner.Services
             Process process = new Process();
             process.StartInfo = info;
             process.Start();
-            process.WaitForExit();
+            //process.WaitForExit();
             process.Close();
             PostRun(taskConfig);
             return false;

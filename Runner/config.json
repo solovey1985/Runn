@@ -8,20 +8,44 @@
     "PathToUtil": "cmd.exe"
   },
   {
-    "Description": "DbMigration",
-    "Id": 1,
-    "Name": "DbMigration",
-    "Parameters": [ "force" ],
-    "PathToFile": "c:\\Projects\\GroupM\\Scripts\\DbMigrations.ps1",
-    "PathToUtil": "powershell.exe"
+    "Description": "Run Service Bus",
+    "Id": 5,
+    "Name": "Run Service Bus",
+    "Parameters": [ ],
+    "PathToFile": "c:\\Projects\\GroupM\\Shared\\Services\\CoreM.Daemon.ServiceBus\\bin\\CoreM.Daemon.ServiceBus.exe",
+    "PathToUtil": "cmd.exe"
   },
   {
-    "Description": "Powershel Test",
-    "Id": 2,
-    "Name": "PS test",
-    "Parameters": [ "" ],
-    "PathToFile": "E:\\Runner\\test.ps1",
-    "PathToUtil": "powershell.exe"
+    "Description": "TV Planner",
+    "Id": 6,
+    "Name": "TV Planner",
+    "Parameters": [ ],
+    "PathToFile": "",
+    "PathToUtil": "e:\\GroupM\\Install\\TvpIntegrationDemo\\TvpIntegrationDemo\\TvpIntegrationDemo\\bin\\Debug\\TvpIntegrationDemo.exe"
+  },
+  {
+    "Description": "MDM Client",
+    "Id": 7,
+    "Name": "MDM Api Client",
+    "Parameters": [ ],
+    "PathToFile": "",
+    "PathToUtil": "E:\\GroupM\\Install\\MDMApiClient\\MDMApiClient\\MDMApiClient\\bin\\Debug\\MDMApiClient.exe"
+  },
+  {
+    "Description": "Log Parser",
+    "Id": 8,
+    "Name": "Log Parser",
+    "Parameters": [ ],
+    "PathToFile": "",
+    "PathToUtil": "d:\\NoInstall\\LPSV2.D1\\LPS.exe"
+  },
+  {
+    "Description": "SQL Studio",
+    "Id": 9,
+    "Name": "SQL Studio",
+    "Parameters": [ ],
+    "PathToFile": "",
+    "PathToUtil": "C:\\Program Files (x86)\\Microsoft SQL Server\\120\\Tools\\Binn\\ManagementStudio\\Ssms.exe"
   },
   {
     "Branch": "master",
@@ -36,6 +60,4 @@
     "PathToUtil": "git.exe",
     "UserName": "solovey1985@ukr.net"
   }
-
-
 ]
