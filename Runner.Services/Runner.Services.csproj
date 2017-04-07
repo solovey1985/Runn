@@ -61,6 +61,7 @@
       <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +72,7 @@
   <ItemGroup>
     <Compile Include="BaseService.cs" />
     <Compile Include="ConfigurationService.cs" />
+    <Compile Include="CryptoService.cs" />
     <Compile Include="GitService.cs" />
     <Compile Include="IBaseService.cs" />
     <Compile Include="Models\GitTask.cs" />

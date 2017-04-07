@@ -55,9 +55,22 @@
     "Name": "Get test",
     "Operation": 1,
     "Parameters": [ "" ],
-    "Password": "Dhjnvytyjub15",
-    "PathToFile": "E:\\Repositories\\Runner\\",
+    "Password": "cCC3kDuEsQSBjux1xln30A=",
+    "PathToFile": "d:\\Repositories\\Runner\\Runn",
     "PathToUtil": "git.exe",
     "UserName": "solovey1985@ukr.net"
+  },
+  {
+    "Branch": "master",
+    "Description": "Git develop",
+    "Email": "andrii_solovienko@epam.com",
+    "Id": 99,
+    "Name": "Get develop",
+    "Operation": 1,
+    "Parameters": [ "" ],
+    "Password": "9wX7AhmzGXxMjwa8k5qkew==",
+    "PathToFile": "c:\\Projects\\GroupM\\",
+    "PathToUtil": "git.exe",
+    "UserName": "andrii_solovienko@epam.com"
   }
 ]

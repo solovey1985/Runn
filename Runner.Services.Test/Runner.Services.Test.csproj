@@ -74,6 +74,7 @@
     <Compile Include="CommandsManagerTests.cs" />
     <Compile Include="CommandsRunnerTests.cs" />
     <Compile Include="ConfigurationServiceTests.cs" />
+    <Compile Include="CryptoServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
