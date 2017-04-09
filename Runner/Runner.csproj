@@ -92,10 +92,26 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Configuration\ConfigurationPage.xaml.cs">
+      <DependentUpon>ConfigurationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Main\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Main\RunCommand.cs" />
     <Compile Include="1_Framework\BaseViewModel.cs" />
     <Compile Include="Main\MainViewModel.cs" />
-    <Page Include="Main\MainWindow.xaml">
+    <Compile Include="Tasks\TasksPage.xaml.cs">
+      <DependentUpon>TasksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workflow\WorkflowsPage.xaml.cs">
+      <DependentUpon>WorkflowsPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Configuration\ConfigurationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -104,10 +120,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="1_Framework\BaseCommand.cs" />
-    <Compile Include="Main\MainWindow.xaml.cs">
+    <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Main\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tasks\TasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workflow\WorkflowsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -138,10 +166,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configuration\" />
-    <Folder Include="Workflow\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Runner.Services\Runner.Services.csproj">
       <Project>{13894374-D1B7-444E-8BB2-9DB600A63390}</Project>

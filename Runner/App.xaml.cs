@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Runner.App_Start;
 using Microsoft.Practices.Unity;
+using Runner.Main;
 
 namespace Runner
 {
@@ -21,6 +22,9 @@ namespace Runner
             var container = UnityConfig.Configure();
             var mainWindow = container.Resolve<MainWindow>();
             Application.Current.MainWindow = mainWindow;
+
+            mainWindow.Content = new MainPage();
+            mainWindow.ShowsNavigationUI = false;
             Application.Current.MainWindow.Show();
         }
     
