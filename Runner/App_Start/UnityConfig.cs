@@ -8,6 +8,8 @@ using System.IO;
 using System.Windows;
 using Microsoft.Practices.Unity;
 using Runner.Services;
+using Runner.Tasks;
+using Runner.Main;
 
 namespace Runner.App_Start
 {
@@ -20,6 +22,8 @@ namespace Runner.App_Start
             container.RegisterType<ISimpleTaskService, SimpleTaskService>();
             container.RegisterType<IConfigurationService, ConfigurationService>();
             container.RegisterType<IPowerShellService, PowerShellService>();
+
+            
      
             return container;
         }

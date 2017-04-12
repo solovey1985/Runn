@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Runner.Services;
+using Runner.Services.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,22 @@ namespace Runner.Tasks
     /// </summary>
     public partial class TasksPage : Page
     {
-        public TasksPage()
-        {
+        TaskViewModel viewModel;
+        public TasksPage(IConfigurationService _service)
+        {   
             InitializeComponent();
+             viewModel = new TaskViewModel(_service);
+            DataContext = viewModel;
+        }
+
+        private void lsbxTasks_Selected(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void lsbxTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            viewModel.CurrentTask = (TaskConfig)lsbxTasks.SelectedItem;
         }
     }
 }

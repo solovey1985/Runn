@@ -8,9 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Tasks"
       Background="AliceBlue"
-      Margin="5"
-      
-      >
+      Margin="5">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -20,19 +18,16 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <ListBox>
+        <StackPanel VerticalAlignment="Stretch" Grid.RowSpan="2">
+            <ListBox ItemsSource="{Binding Tasks}" Name="lsbxTasks"  SelectionChanged="lsbxTasks_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <Label Content="{Binding Type}" />
-                            <TextBlock Text="{Binding Name}"/>
-                        </StackPanel>
+                        <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding Path=CurrentTask}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -50,7 +45,7 @@
                 </StackPanel>
             <StackPanel Margin="0 2" Grid.Column="1">
                     <Label>Name</Label>
-                    <TextBox Name="txbxName" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBox>
+                <TextBox Name="txbxName"  Text="{Binding Name}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBox>
                 </StackPanel>
             <StackPanel Margin="0 2" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label>Description</Label>
@@ -61,7 +56,7 @@
                 <Label >Path to file</Label>
                     <Button Height="26">Select File</Button>
                 </DockPanel>
-                <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToFile" Text="{Binding PahtToFile}"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToFile" Text="{Binding PathToUtil}"></TextBlock>
             </StackPanel>
         </Grid>
             

@@ -104,6 +104,7 @@
     <Compile Include="Tasks\TasksPage.xaml.cs">
       <DependentUpon>TasksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\TaskViewModel.cs" />
     <Compile Include="Workflow\WorkflowsPage.xaml.cs">
       <DependentUpon>WorkflowsPage.xaml</DependentUpon>
     </Compile>

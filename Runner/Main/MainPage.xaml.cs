@@ -1,4 +1,5 @@
-﻿using Runner.Configuration;
+﻿using Microsoft.Practices.Unity;
+using Runner.Configuration;
 using Runner.Tasks;
 using Runner.Workflow;
 using System;
@@ -23,10 +24,18 @@ namespace Runner.Main
     /// </summary>
     public partial class MainPage : Page
     {
+        public IUnityContainer _container;
         public MainPage()
         {
             InitializeComponent();
         }
+
+        public MainPage(IUnityContainer container):this()
+        {
+            _container = container;
+        }
+
+
 
         private void Configuration_Navigate(object sender, RoutedEventArgs e)
         {
@@ -43,7 +52,8 @@ namespace Runner.Main
         private void Tasks_Navigate(object sender, RoutedEventArgs e)
         {
             NavigationService nav = NavigationService.GetNavigationService(this);
-            nav.Navigate(new TasksPage(), new object());
+            var page = _container.Resolve<TasksPage>();
+            nav.Navigate(page, new object());
         }
 
     }
