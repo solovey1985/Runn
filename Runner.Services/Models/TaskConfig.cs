@@ -15,7 +15,7 @@ namespace Runner.Services.Models
         public string PathToFile { get; set; }
         public string PathToUtil { get; set; }
         public string[] Parameters { get; set; }
-
+        public TaskType Type { get; set; }
         public bool Validate()
         {
             bool result = true;
@@ -26,4 +26,12 @@ namespace Runner.Services.Models
             return result;
         }
    }
+
+    public enum TaskType
+    {
+        Executable,
+        CommandLine,
+        PowerShell,
+        Git
+    }
 }

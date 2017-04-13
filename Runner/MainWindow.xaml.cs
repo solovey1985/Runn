@@ -31,7 +31,6 @@ namespace Runner
             InitializeComponent();
             MainViewModel _viewModel = viewModel; 
             DataContext = _viewModel;
-
         }
     }
 }
