@@ -12,7 +12,7 @@ using WPFNotification.Model;
 
 namespace Runner.Commands
 {
-    public class RunCommand:BaseCommand
+    public class RunCommand
     {
         private NotificationDialogService _dialogService;
         private BaseService taskRunner;
@@ -25,7 +25,7 @@ namespace Runner.Commands
             _configService.Path = "config.json";
 
         }
-        public override void Execute(object parameter)
+        public void Execute(object parameter)
         {
             Services.Models.TaskConfig current = (Services.Models.TaskConfig)parameter;
             if (current != null)
