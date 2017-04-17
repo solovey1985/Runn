@@ -66,6 +66,22 @@ namespace Runner.Tasks
                             }
                         })); }
         }
+        private BaseCommand removeCommand;
+        public BaseCommand RemoveCommand { get
+            {
+                return removeCommand ??
+                    (removeCommand = new BaseCommand(obj=> {
+                        if(CurrentTask != null)
+                        {
+                            if (Tasks.Contains(CurrentTask))
+                            {
+                                Tasks.Remove(CurrentTask);
+                                CurrentTask = new TaskConfig();
+                            }
+                        }
+                    }));
+            } }
+
         public List<TaskConfig> Tasks { get; set; } 
         TaskConfig _currentTask { get; set; }
         public TaskConfig CurrentTask { get { return _currentTask; }
