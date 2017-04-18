@@ -1,5 +1,13 @@
 ﻿[
   {
+    "Description": "Run Nake",
+    "Id": 0,
+    "Name": "Nake TVIntegration",
+    "Parameters": [ "Defualt " ],
+    "PathToFile": "c:\\Projects\\GroupM\\Scripts\\SQL\\CinemaIntegration\\Nake\\Run.cmd",
+    "PathToUtil": "cmd.exe"
+  },
+  {
     "Description": "Build Ptoject",
     "Id": 0,
     "Name": "Build project",

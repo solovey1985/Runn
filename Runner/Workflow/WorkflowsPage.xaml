@@ -7,8 +7,45 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Workflows">
-
+<StaticResource>
+    <Style TargetType="Button">
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+</StaticResource>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+    <StackPanel Grid.Row="1">
+        <ListBox Name="namelsbxTasks" ItemsSource="{Binding Tasks}">
+                <ListBox.ItemTemplate>
+                <DataTemplate>
+                <StackPanel>
+                            <Label Content="{Binding Name}"></Label>
+                            <Label Content="{Binding Order}"></Label>
+                 </StackPanel>
+                </DataTemplate>    
+                </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+        <DockPanel Grid.Row="1" Grid.Column="1">
+            <WrapPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button>Save</Button>
+                <Button>Save</Button>
+                <Button>Save</Button>
+                <Button>Save</Button>
+                <Button>Save</Button>
+            </WrapPanel>
+        </DockPanel>
         
+
+
     </Grid>
 </Page>

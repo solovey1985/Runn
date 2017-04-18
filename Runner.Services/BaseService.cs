@@ -32,7 +32,10 @@ namespace Runner.Services
             Process process = new Process();
             process.StartInfo = info;
             process.Start();
-            //process.WaitForExit();
+            
+            //TODO: IN workflows can be useful
+            //process.WaitForExit(); 
+
             process.Close();
             PostRun(taskConfig);
             return false;
