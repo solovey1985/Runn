@@ -25,13 +25,19 @@ namespace Runner.Services.Models
             }
             return result;
         }
+        public bool Validate(List<TaskConfig> tasksToAdd)
+        {
+            bool canBeAdded = false;
+            canBeAdded = !tasksToAdd.Any(x => x.Name == Name || x.PathToFile == PathToFile);
+            return canBeAdded && Validate();
+        }
    }
 
     public enum TaskType
     {
-        Executable,
-        CommandLine,
-        PowerShell,
-        Git
+        Executable = 1,
+        CommandLine = 2,
+        PowerShell = 3 ,
+        Git = 4
     }
 }

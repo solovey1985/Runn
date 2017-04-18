@@ -9,16 +9,29 @@ namespace Runner.Commands
 {
     public class BaseCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        private Action<object> execute;
+        private Func<object, bool> canExecute;
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public BaseCommand(Action<object> execute, Func<object,bool> canExecute = null)
+        {
+            this.execute = execute;
+            this.canExecute = canExecute;
+        }
 
         public virtual bool CanExecute(object parameter)
         {
-            return true;
+            return canExecute == null || canExecute(parameter);
         }
 
         public virtual void Execute(object parameter)
         {
-         
+            execute(parameter);
         }
     }
 }

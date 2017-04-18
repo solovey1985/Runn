@@ -24,14 +24,10 @@ namespace Runner.Tasks
     {
         TaskViewModel viewModel;
         public TasksPage(IConfigurationService _service)
-        {   
-            InitializeComponent();
-             viewModel = new TaskViewModel(_service);
-            DataContext = viewModel;
-        }
-
-        private void lsbxTasks_Selected(object sender, RoutedEventArgs e)
         {
+            viewModel = new TaskViewModel(_service);
+            DataContext = viewModel;
+            InitializeComponent();
             
         }
 

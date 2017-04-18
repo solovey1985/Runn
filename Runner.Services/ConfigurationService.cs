@@ -50,5 +50,11 @@ namespace Runner.Services
             List<T> configs =  JsonConvert.DeserializeObject<List<T>>(configStr);
             return (T)configs.FirstOrDefault(c => c.Id==id);
         }
+
+        public void Save(IEnumerable<TaskConfig> configs)
+        {
+           var configString = JsonConvert.SerializeObject(configs.ToList());
+            File.WriteAllText(Path, configString);
+        }
     }
 }

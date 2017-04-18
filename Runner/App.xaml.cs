@@ -24,7 +24,7 @@ namespace Runner
             Application.Current.MainWindow = mainWindow;
 
             mainWindow.Content = container.Resolve<MainPage>();
-            mainWindow.ShowsNavigationUI = false;
+            mainWindow.ShowsNavigationUI = true;
             Application.Current.MainWindow.Show();
         }
     

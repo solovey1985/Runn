@@ -9,6 +9,12 @@
       Title="Tasks"
       Background="AliceBlue"
       Margin="5">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="2"></Setter>
+            <Setter Property="MinWidth" Value="50"></Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -19,19 +25,20 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Stretch" Grid.Row="1" Margin="2 0 0 0">
-            <ListBox ItemsSource="{Binding Tasks}" Name="lsbxTasks"  SelectionChanged="lsbxTasks_SelectionChanged" MinHeight="100">
+            <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Tasks, Mode=TwoWay}" Name="lsbxTasks"  SelectionChanged="lsbxTasks_SelectionChanged" MinHeight="100">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Button Command="{Binding AddCommand}">Add task</Button>
         </StackPanel>
-        <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding Path=CurrentTask}" Margin="2 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="2 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -39,27 +46,42 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-                <StackPanel>
-                    <Label>Type</Label>
-                <ComboBox Name="cmbxTaskType" ItemsSource="{Binding TaskTypes, Mode=TwoWay}" />
-                </StackPanel>
+            <StackPanel>
+                <Label>Type</Label>
+                <ComboBox Name="cmbxTaskType" ItemsSource="{Binding TaskTypes}" DisplayMemberPath="Text" 
+                                        SelectedValuePath="Value" SelectedValue="{Binding CurrentTask.Type}"
+                          IsSynchronizedWithCurrentItem="True"
+                          >
+
+                </ComboBox>
+            </StackPanel>
             <StackPanel Grid.Column="1" Margin="2" Height="Auto">
                 <Label>Name</Label>
-                <TextBox Name="txbxName"  Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-             </StackPanel>
+                <TextBox Name="txbxName"  Text="{Binding CurrentTask.Name}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+            </StackPanel>
             <StackPanel Margin="0 " Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label>Description</Label>
-                <TextBox MinLines="2" Name="txbxDescription" Text="{Binding Description}"></TextBox>
+                <TextBox MinLines="2" Name="txbxDescription" Text="{Binding CurrentTask.Description}"></TextBox>
             </StackPanel>
             <StackPanel Margin="2" Grid.Row="3" Grid.ColumnSpan="2">
                 <DockPanel  HorizontalAlignment="Stretch" Height="26" VerticalAlignment="Top">
-                <Label >Path to file</Label>
-                    <Button Height="26">Select File</Button>
+                    <Label >Path to file</Label>
+                    <Button Command="{Binding ShowFileDialog}" CommandParameter="File">Select File</Button>
                 </DockPanel>
-                <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToFile" Text="{Binding PathToUtil}"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToFile" Text="{Binding CurrentTask.PathToFile}"></TextBlock>
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <Label >Path to utility</Label>
+                    <Button Command="{Binding ShowFileDialog}" CommandParameter="Util">Select File</Button>
+                </DockPanel>
+                <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToUtil" Text="{Binding CurrentTask.PathToUtil}"></TextBlock>
+                <WrapPanel Margin="2" VerticalAlignment="Stretch">
+                    <Button  Command="" CommandParameter="" Content="Cancel"/> 
+                    <Button  Command="{Binding SaveCommand}" CommandParameter="CurrentTask" Content="Save"/>
+                    <Button x:Name="btnRemove" Command="{Binding RemoveCommand}" Content="Remove"/>
+                </WrapPanel>
             </StackPanel>
+
         </Grid>
-            
-        
+
     </Grid>
 </Page>
