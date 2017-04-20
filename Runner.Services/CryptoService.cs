@@ -8,13 +8,13 @@ namespace Runner.Services
 {
     public class CryptoService
     {
-        string publicKey = "#SASD!@dsd34D5sml9)lf(-khsdjfsdkfsdfkjsdfik";
-        string privateKey = "q2#r44C&m(%mytp8&";
+        static string publicKey = "#SASD!@dsd34D5sml9)lf(-khsdjfsdkfsdfkjsdfik";
+        static string  privateKey = "q2#r44C&m(%mytp0";
 
-        public static string Encrypt(string toEncrypt, string securityKey)
+        public static string Encrypt(string toEncrypt)
         {
-            var key = securityKey;
-            var keyArray = Encoding.UTF8.GetBytes(key);
+           
+            var keyArray = Encoding.UTF8.GetBytes(privateKey);
 
             var tdes = new TripleDESCryptoServiceProvider
             {
@@ -30,9 +30,9 @@ namespace Runner.Services
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
 
-        public static string Decrypt(string cipherString, string securityKey)
+        public static string Decrypt(string cipherString)
         {
-            var key = securityKey;
+            var key = privateKey;
             var keyArray = Encoding.UTF8.GetBytes(key);
 
             var tdes = new TripleDESCryptoServiceProvider

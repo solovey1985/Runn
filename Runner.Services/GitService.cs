@@ -63,7 +63,7 @@ namespace Runner.Services
                         new UsernamePasswordCredentials()
                         {
                             Username = taskConfig.UserName,
-                            Password = CryptoService.Decrypt(taskConfig.Password, "q2#r44C&m(%mytp0")
+                            Password = CryptoService.Decrypt(taskConfig.Password)
                         });
                 repo.Network.Pull(new LibGit2Sharp.Signature(taskConfig.UserName, taskConfig.UserName, new DateTimeOffset(DateTime.Now)), options);
             }
@@ -80,7 +80,7 @@ namespace Runner.Services
                 return new UsernamePasswordCredentials()
                 {
                     Username = task.UserName,
-                    Password = CryptoService.Decrypt(task.Password, "q2#r44C&m(%mytp0")
+                    Password = CryptoService.Decrypt(task.Password)
                 };
             }
             return new UsernamePasswordCredentials();

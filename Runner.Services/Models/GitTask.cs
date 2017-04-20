@@ -18,10 +18,10 @@ namespace Runner.Services.Models
 
     public enum GitOperations
     {
-        Fetch,
-        Pull,
-        Push,
-        Commit,
-        Merge
+        Fetch = 0,
+        Pull = 1,
+        Push = 2,
+        Commit = 3,
+        Merge = 4
     }
 }

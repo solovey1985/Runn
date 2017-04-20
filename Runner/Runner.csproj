@@ -187,7 +187,7 @@
   </Target>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties config_1json__JSONSchema="http://json.schemastore.org/global" />
+      <UserProperties config_1json__JSONSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

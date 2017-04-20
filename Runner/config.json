@@ -63,9 +63,10 @@
     "Name": "Get test",
     "Operation": 1,
     "Parameters": [ "" ],
-    "Password": "cCC3kDuEsQSBjux1xln30A=",
-    "PathToFile": "d:\\Repositories\\Runner\\Runn",
+    "Password": "cCC3kDuEsQSBjux1xln30A==",
+    "PathToFile": "d:\\Repositories\\TestRunner",
     "PathToUtil": "git.exe",
+    "RemotePath": "https://github.com/solovey1985/testRunner.git",
     "UserName": "solovey1985@ukr.net"
   },
   {

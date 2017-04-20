@@ -16,12 +16,11 @@ namespace Runner.Services.Test
         [Test]
         public void CanEncrypt_NotEmptyString_Success()
         {
-            string privateKey = "q2#r44C&m(%mytp0";
             string s1 = "";
             string sEnc = String.Empty;
             string s2 = string.Empty;
-            sEnc = CryptoService.Encrypt(s1,privateKey);
-            s2 = CryptoService.Decrypt(sEnc, privateKey);
+            sEnc = CryptoService.Encrypt(s1);
+            s2 = CryptoService.Decrypt(sEnc);
             Debug.Write(s2);
             Assert.AreEqual(s1,s2);
         }
