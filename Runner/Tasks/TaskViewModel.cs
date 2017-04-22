@@ -9,33 +9,34 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Runner.Shared.Credentials;
 
 namespace Runner.Tasks
 {
-     public class TaskViewModel : INotifyPropertyChanged
+    public class TaskViewModel : INotifyPropertyChanged
     {
         IConfigurationService _confgService;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public event EventHandler<CredentilasInputArgs> CredentialsIputRequired;
         public TaskViewModel(IConfigurationService confgService)
         {
             _confgService = confgService;
             Tasks = _confgService.ReadConfigurationFromFile("config.json");
-            TaskTypes = new ObservableCollection<ComboData>(Enum.GetValues(typeof(TaskType)).Cast<TaskType>().Select(v => new ComboData {Value = v, Text = v.ToString() }).ToList());
+            TaskTypes = new ObservableCollection<ComboData>(Enum.GetValues(typeof(TaskType)).Cast<TaskType>().Select(v => new ComboData { Value = v, Text = v.ToString() }).ToList());
             CurrentTask = new TaskConfig();
-            
-            
+
+
         }
 
 
         private BaseCommand saveCommand;
         public BaseCommand SaveCommand {
             get {
-                    return saveCommand ??
-                    (saveCommand = new BaseCommand(obj => {
-                        _confgService.Save(Tasks.ToList());
-                    }));
+                return saveCommand ??
+                (saveCommand = new BaseCommand(obj => {
+                    _confgService.Save(Tasks.ToList());
+                }));
             }
         }
         private BaseCommand addCommand;
@@ -70,8 +71,8 @@ namespace Runner.Tasks
         public BaseCommand RemoveCommand { get
             {
                 return removeCommand ??
-                    (removeCommand = new BaseCommand(obj=> {
-                        if(CurrentTask != null)
+                    (removeCommand = new BaseCommand(obj => {
+                        if (CurrentTask != null)
                         {
                             if (Tasks.Contains(CurrentTask))
                             {
@@ -81,26 +82,37 @@ namespace Runner.Tasks
                         }
                     }));
             } }
-
-        public List<TaskConfig> Tasks { get; set; } 
+        private BaseCommand credentialsRequiredCommand;
+        public BaseCommand CredentialsRequiredCommand
+        {
+            get
+            {
+                return credentialsRequiredCommand ??
+                    (credentialsRequiredCommand = new BaseCommand(obj => {
+                        CredentialsIputRequired(this, null);
+                    }));
+            }
+        }
+        public List<TaskConfig> Tasks { get; set; }
         TaskConfig _currentTask { get; set; }
         public TaskConfig CurrentTask { get { return _currentTask; }
-        set { _currentTask = value;  OnPropertyChanged("CurrentTask"); } }
-
+            set { _currentTask = value; OnPropertyChanged("CurrentTask"); } }
+        public CredentialsModel Credentials { get; set; }
         private void OnPropertyChanged(string prop)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-
-
-        public ObservableCollection<ComboData> TaskTypes { get; set ;}
-
+        public ObservableCollection<ComboData> TaskTypes { get; set; }
         public void OnTaskChanged(TaskConfig config)
         {
             CurrentTask = config;
         }
     }
-
+    public class CredentilasInputArgs : EventArgs
+    {
+        public string Login { get; set; }
+        public string Password { get; set; }
+    }
     public class ComboData
     {
         public TaskType Value { get;set;}

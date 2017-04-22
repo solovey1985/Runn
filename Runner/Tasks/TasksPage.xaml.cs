@@ -1,5 +1,6 @@
 ﻿using Runner.Services;
 using Runner.Services.Models;
+using Runner.Shared.Credentials;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Runner.Tasks
         {
             viewModel = new TaskViewModel(_service);
             DataContext = viewModel;
+            viewModel.CredentialsIputRequired += OnCredentialsInput;
             InitializeComponent();
             
         }
@@ -35,5 +37,18 @@ namespace Runner.Tasks
         {
             viewModel.CurrentTask = (TaskConfig)lsbxTasks.SelectedItem;
         }
+
+        public void OnCredentialsInput(object e, CredentilasInputArgs args) {
+
+            CredentialsWindow credentialsWindow = new CredentialsWindow();
+
+            if (credentialsWindow.ShowDialog() == true) {
+                var credentials = (CredentialsModel)credentialsWindow.DataContext;
+
+            }
+            
+        }
     }
+
+    
 }

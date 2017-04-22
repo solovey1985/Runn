@@ -101,6 +101,10 @@
     <Compile Include="Main\RunCommand.cs" />
     <Compile Include="1_Framework\BaseViewModel.cs" />
     <Compile Include="Main\MainViewModel.cs" />
+    <Compile Include="Shared\Credentials\CreadentialsModel.cs" />
+    <Compile Include="Shared\Credentials\CredentialsWindow.xaml.cs">
+      <DependentUpon>CredentialsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tasks\TasksPage.xaml.cs">
       <DependentUpon>TasksPage.xaml</DependentUpon>
     </Compile>
@@ -126,6 +130,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Main\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shared\Credentials\CredentialsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
