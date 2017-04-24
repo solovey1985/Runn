@@ -23,12 +23,15 @@ namespace Runner.Tasks
     /// </summary>
     public partial class TasksPage : Page
     {
+        public event EventHandler<CredentilasInputArgs> CredentialsInputed;
+
         TaskViewModel viewModel;
         public TasksPage(IConfigurationService _service)
         {
             viewModel = new TaskViewModel(_service);
             DataContext = viewModel;
             viewModel.CredentialsIputRequired += OnCredentialsInput;
+            CredentialsInputed += viewModel.OnCredentialsInputed;
             InitializeComponent();
             
         }
@@ -37,14 +40,17 @@ namespace Runner.Tasks
         {
             viewModel.CurrentTask = (TaskConfig)lsbxTasks.SelectedItem;
         }
-
+        
         public void OnCredentialsInput(object e, CredentilasInputArgs args) {
 
             CredentialsWindow credentialsWindow = new CredentialsWindow();
 
             if (credentialsWindow.ShowDialog() == true) {
                 var credentials = (CredentialsModel)credentialsWindow.DataContext;
-
+                if (CredentialsInputed != null)
+                {
+                    CredentialsInputed(this, new CredentilasInputArgs() { Login = credentials.Login, Password = credentials.Password });
+                }
             }
             
         }

@@ -28,7 +28,22 @@ namespace Runner.Tasks
 
 
         }
+        public void OnCredentialsInputed(object e, CredentilasInputArgs args)
+        {
+            if (args != null)
+            {
+                if(CurrentTask.Type == TaskType.Git)
+                {
+                    GitTask gitTask = _confgService.GetTaskById<GitTask>(CurrentTask.Id);
 
+                    gitTask.UserName = args.Login;
+                    gitTask.Password = args.Password;
+                    CurrentTask = gitTask;
+                    _confgService.Save(Tasks);
+                    OnPropertyChanged("CurrentTask");
+                }
+            }
+        }
 
         private BaseCommand saveCommand;
         public BaseCommand SaveCommand {
