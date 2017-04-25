@@ -43,89 +43,28 @@ namespace Runner.Services
         {
             Path = path;
             string configStr = File.ReadAllText(path);
-            var settings = new JsonSerializerSettings()
-            {
-                                //Converters = new List<JsonConverter> { new TaskCreationConverter() }
-            };
-            return JsonConvert.DeserializeObject<List<TaskConfig>>(configStr, settings);
+            return JsonConvert.DeserializeObject<List<TaskConfig>>(configStr, GetSerializingSetting());
         }
 
         public T GetTaskById<T>(int id) where T : TaskConfig
-            {
+        {
             string configStr = File.ReadAllText(Path);
-            var settings = new JsonSerializerSettings()
-            {
-                Formatting = Formatting.Indented,
-                ObjectCreationHandling = ObjectCreationHandling.Auto,
-                TypeNameHandling = TypeNameHandling.All,
-                //Converters = new List<JsonConverter> { new TaskCreationConverter() }
-            };
-            List<T> configs =  JsonConvert.DeserializeObject<List<T>>(configStr, settings);
+           List<T> configs =  JsonConvert.DeserializeObject<List<T>>(configStr, GetSerializingSetting());
             return (T)configs.FirstOrDefault(c => c.Id==id);
         }
 
         public void Save(IEnumerable<TaskConfig> configs)
         {
-            var settings = new JsonSerializerSettings() {
-                Formatting = Formatting.Indented,
-                ObjectCreationHandling = ObjectCreationHandling.Replace,
-                TypeNameHandling = TypeNameHandling.Auto,
-               // Converters = new List<JsonConverter> { new TaskCreationConverter() }
-            };
-           var configString = JsonConvert.SerializeObject(configs.ToList(), settings);
+           var configString = JsonConvert.SerializeObject(configs.ToList(), GetSerializingSetting());
            File.WriteAllText(Path, configString);
         }
-    }
-    public abstract class JsonBaseConverter<T> : JsonConverter
-    {
-        public abstract T Create(Type objectType, JObject jObject);
-        public override bool CanConvert(Type objectType)
-        {
-            return typeof(T).IsAssignableFrom(objectType);
 
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        private JsonSerializerSettings GetSerializingSetting()
         {
-            T result;
-            if (reader.TokenType == JsonToken.StartArray)
-            {
-                return serializer.Deserialize<List<T>>(reader);
-            }
-            else
-            {
-                var jsonObject = JObject.Load(reader);
-                result = Create(objectType, jsonObject);
-                serializer.Populate(reader, result);
-                return result;
-            }
-            
+            return new JsonSerializerSettings(){
+                Formatting = Formatting.Indented,
+                TypeNameHandling = TypeNameHandling.All
+            };
         }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class TaskCreationConverter : JsonBaseConverter<TaskConfig>
-    {
-        public override TaskConfig Create(Type objectType, JObject jsonObject)
-        {
-            var typeName = jsonObject["Type"].ToString();
-            TaskType type;
-            Enum.TryParse<TaskType>(typeName, out type);
-            switch (type)
-            {
-                case TaskType.Git:
-                    return new GitTask();
-                case TaskType.CommandLine:
-                case TaskType.Executable:
-                case TaskType.PowerShell:
-                    return new TaskConfig();
-                default:
-                    return null;
-            }
-        }
-    }
+    } 
 }

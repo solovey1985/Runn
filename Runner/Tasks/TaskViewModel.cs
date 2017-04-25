@@ -34,13 +34,13 @@ namespace Runner.Tasks
             {
                 if(CurrentTask.Type == TaskType.Git)
                 {
-                    GitTask gitTask = _confgService.GetTaskById<GitTask>(CurrentTask.Id);
 
-                    gitTask.UserName = args.Login;
-                    gitTask.Password = args.Password;
-                    CurrentTask = gitTask;
-                    _confgService.Save(Tasks);
+                    IWithCredentials task = CurrentTask as IWithCredentials;
+                    if (task == null) return;
+                    task.UserName = args.Login;
+                    task.Password = CryptoService.Encrypt(args.Password);
                     OnPropertyChanged("CurrentTask");
+                    _confgService.Save(Tasks);
                 }
             }
         }
@@ -104,7 +104,10 @@ namespace Runner.Tasks
             {
                 return credentialsRequiredCommand ??
                     (credentialsRequiredCommand = new BaseCommand(obj => {
-                        CredentialsIputRequired(this, null);
+                        IWithCredentials task = CurrentTask as IWithCredentials;
+                        if (task == null) return;
+                        CredentilasInputArgs credentialsInputArgs = new CredentilasInputArgs(task.UserName); 
+                        CredentialsIputRequired(this, credentialsInputArgs);
                     }));
             }
         }
@@ -125,6 +128,15 @@ namespace Runner.Tasks
     }
     public class CredentilasInputArgs : EventArgs
     {
+        public CredentilasInputArgs()
+        {
+        }
+
+        public CredentilasInputArgs(string userName)
+        {
+           Login = userName;
+        }
+
         public string Login { get; set; }
         public string Password { get; set; }
     }

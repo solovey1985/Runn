@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Data.Common;
 namespace Runner.Services.Models
 {
-    [JsonObject]
     public class GitTask : TaskConfig, IWithCredentials
     {
         public GitOperations Operation { get; set; }

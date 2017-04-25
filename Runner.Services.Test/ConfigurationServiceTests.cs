@@ -49,13 +49,13 @@ namespace Runner.Services.Test
         public void WriteConfigToFile_Should_FileCreated_When_ConfigCorrect()
         {
             // Arrange
-             
-
+            List<TaskConfig> tasks = new List<TaskConfig>();
+            tasks.Add(new TaskConfig() { });
+            tasks.Add(new TaskConfig() { });
             // Act
-
-
+            
             // Assert
-
+            Assert.NotNull(tasks);
         }
         [Test]
         public void UpdateConfigFile_Should_UpdateFile_When_ConfigWasChanged()

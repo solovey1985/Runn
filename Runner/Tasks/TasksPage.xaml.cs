@@ -42,8 +42,13 @@ namespace Runner.Tasks
         }
         
         public void OnCredentialsInput(object e, CredentilasInputArgs args) {
-
-            CredentialsWindow credentialsWindow = new CredentialsWindow();
+            CredentialsWindow credentialsWindow;
+            if (args != null)            {
+                credentialsWindow = new CredentialsWindow(new CredentialsModel() { Login = args.Login });
+            }
+            else {
+                credentialsWindow = new CredentialsWindow();
+            }
 
             if (credentialsWindow.ShowDialog() == true) {
                 var credentials = (CredentialsModel)credentialsWindow.DataContext;

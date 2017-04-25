@@ -184,7 +184,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy  "$(ProjectDir)config.json"  "$(TargetDir)"  /Y</PreBuildEvent>
+    <PreBuildEvent>:: xcopy  "$(ProjectDir)config.json"  "$(TargetDir)"  /Y</PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
