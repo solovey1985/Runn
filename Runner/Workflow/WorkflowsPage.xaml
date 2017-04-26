@@ -37,7 +37,7 @@
         </ListBox>
     </StackPanel>
         <DockPanel Grid.Row="1" Grid.Column="1">
-            <WrapPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <WrapPanel DockPanel.Dock="Bottom" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center">
                 <Button>Save</Button>
                 <Button>Save</Button>
                 <Button>Save</Button>

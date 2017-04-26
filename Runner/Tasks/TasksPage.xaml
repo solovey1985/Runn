@@ -73,11 +73,12 @@
                     <Label >Path to utility</Label>
                     <Button Command="{Binding ShowFileDialog}" CommandParameter="Util">Select File</Button>
                 </DockPanel>
+                <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToUtil" Text="{Binding CurrentTask.PathToUtil}"></TextBlock>
                 <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <Label >Enter Credentials</Label>
                     <Button Command="{Binding CredentialsRequiredCommand}">Click to Input</Button>
                 </DockPanel>
-                <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToUtil" Text="{Binding CurrentTask.PathToUtil}"></TextBlock>
+                
                 <WrapPanel Margin="2" VerticalAlignment="Stretch">
                     <Button  Command="" CommandParameter="" Content="Cancel"/> 
                     <Button  Command="{Binding SaveCommand}" CommandParameter="CurrentTask" Content="Save"/>
