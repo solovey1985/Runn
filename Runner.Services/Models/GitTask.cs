@@ -9,7 +9,7 @@ namespace Runner.Services.Models
 {
     public class GitTask : TaskConfig, IWithCredentials
     {
-        public GitOperations Operation { get; set; }
+        public GitOperation Operation { get; set; }
         public string Password { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
@@ -24,7 +24,7 @@ namespace Runner.Services.Models
         
     }
 
-    public enum GitOperations
+    public enum GitOperation
     {
         Fetch = 0,
         Pull = 1,

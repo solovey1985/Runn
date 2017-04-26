@@ -91,6 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="1_Framework\VisibilityConverter.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Configuration\ConfigurationPage.xaml.cs">
       <DependentUpon>ConfigurationPage.xaml</DependentUpon>
