@@ -15,7 +15,7 @@ namespace Runner.Tasks
 {
     public class TaskViewModel : INotifyPropertyChanged
     {
-        IConfigurationService _confgService;
+//        IConfigurationService _confgService;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<CredentilasInputArgs> CredentialsIputRequired;
@@ -23,8 +23,8 @@ namespace Runner.Tasks
         {
             _confgService = confgService;
             Tasks = _confgService.ReadConfigurationFromFile("config.json");
-            TaskTypes = new ObservableCollection<TypeComboData>(Enum.GetValues(typeof(TaskType)).Cast<TaskType>().Select(v => new TypeComboData { Value = v, Text = v.ToString() }).ToList());
-            GitOperations = new ObservableCollection<GitComboData>(Enum.GetValues(typeof(GitOperation)).Cast<GitOperation>().Select(x => new GitComboData { Value = x, Text = x.ToString() }).ToList());
+            TaskTypes = new ObservableCollection<ComboData<TaskType>>(Enum.GetValues(typeof(TaskType)).Cast<TaskType>().Select(v => new ComboData<TaskType> { Value = v, Text = v.ToString() }).ToList());
+            GitOperations = new ObservableCollection<ComboData<GitOperation>>(Enum.GetValues(typeof(GitOperation)).Cast<GitOperation>().Select(x => new ComboData<GitOperation> { Value = x, Text = x.ToString() }).ToList());
             CurrentTask = new TaskConfig();
 
 
@@ -121,8 +121,8 @@ namespace Runner.Tasks
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-        public ObservableCollection<TypeComboData> TaskTypes { get; set; }
-        public ObservableCollection<GitComboData> GitOperations { get; set; }
+        public ObservableCollection<ComboData<TaskType>> TaskTypes { get; set; }
+        public ObservableCollection<ComboData<GitOperation>> GitOperations { get; set; }
         public void OnTaskChanged(TaskConfig config)
         {
             CurrentTask = config;
@@ -142,19 +142,9 @@ namespace Runner.Tasks
         public string Login { get; set; }
         public string Password { get; set; }
     }
-    public class TypeComboData
+    public class ComboData<T>
     {
-        public TaskType Value { get;set;}
-        public string Text { get; set; }
-
-        public override string ToString()
-        {
-            return Text;
-        }
-    }
-    public class GitComboData
-    {
-        public GitOperation Value { get; set; }
+        public T Value { get; set; }
         public string Text { get; set; }
 
         public override string ToString()
