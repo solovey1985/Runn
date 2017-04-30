@@ -30,21 +30,21 @@ namespace Runner.Services
             if (step != null && step.Validate())
             {
                 IBaseService service = GetServiceByName(step);
-                service.Run(step);
+                service.Run(step.Task);
             }
         }
 
         private IBaseService GetServiceByName(WorkflowStep step)
         {
             IBaseService taskRunner;
-            switch (step.PathToUtil)
+            switch (step.Task.PathToUtil)
             {
                 case "cmd.exe": { taskRunner = new SimpleTaskService(); break; }
                 case "powershell.exe": { taskRunner = new PowerShellService(); break; }
                 case "git.exe":
                     {
                         taskRunner = new GitService();
-                        ((GitService)taskRunner).CurrentTask = _configService.GetTaskById<GitTask>(step.Id);
+                        ((GitService)taskRunner).CurrentTask = _configService.GetTaskById<GitTask>(step.Task.Id);
                         
                         break;
                     }

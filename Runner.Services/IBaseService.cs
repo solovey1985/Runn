@@ -1,4 +1,5 @@
 ﻿using Runner.Services.Models;
+using Runner.Services.Workflows;
 using System.Collections.Generic;
 
 namespace Runner.Services
@@ -25,6 +26,7 @@ namespace Runner.Services
         List<TaskConfig> ReadConfigurationFromFile(string path);
 
         void Save(IEnumerable<TaskConfig> configs);
+        void SaveWorkflow(string name, Workflow workflow);
     }
     public interface IWorkflowService
     {

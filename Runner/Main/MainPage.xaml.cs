@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using Runner.Configuration;
 using Runner.Tasks;
-using Runner.Workflow;
+using Runner.Workflows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,13 +40,15 @@ namespace Runner.Main
         private void Configuration_Navigate(object sender, RoutedEventArgs e)
         {
             NavigationService nav = NavigationService.GetNavigationService(this);
+
             nav.Navigate(new ConfigurationPage(), new object());
         }
         
         private void Worfklows_Navigate(object sender, RoutedEventArgs e)
         {
             NavigationService nav = NavigationService.GetNavigationService(this);
-            nav.Navigate(new WorkflowsPage(), new object());
+            var page = _container.Resolve<WorkflowsPage>();
+            nav.Navigate(page, new object());
         }
 
         private void Tasks_Navigate(object sender, RoutedEventArgs e)

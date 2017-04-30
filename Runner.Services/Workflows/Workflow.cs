@@ -20,7 +20,14 @@ namespace Runner.Services.Workflows
     }
 }
 
-public class WorkflowStep : TaskConfig
+public class WorkflowStep 
 {
     public int Order { get; set; }
+    public int TaskId { get { return Task?.Id ?? 0; } }
+    public TaskConfig Task { get; set; }
+
+    public bool Validate() {
+
+        return Task != null && Order >= 0;
+    }
 }

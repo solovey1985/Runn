@@ -113,6 +113,7 @@
     <Compile Include="Workflow\WorkflowsPage.xaml.cs">
       <DependentUpon>WorkflowsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workflow\WorkflowViewModel.cs" />
     <Page Include="Configuration\ConfigurationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -15,7 +15,7 @@ namespace Runner.Tasks
 {
     public class TaskViewModel : INotifyPropertyChanged
     {
-//        IConfigurationService _confgService;
+       IConfigurationService _confgService;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<CredentilasInputArgs> CredentialsIputRequired;

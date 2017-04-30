@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using Runner.Services.Models;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using Runner.Services.Workflows;
 
 namespace Runner.Services
 {
@@ -66,5 +68,10 @@ namespace Runner.Services
                 TypeNameHandling = TypeNameHandling.All
             };
         }
+        public void SaveWorkflow(string name, Workflow workflow)
+        {
+            var configString = JsonConvert.SerializeObject(workflow, GetSerializingSetting());
+            File.WriteAllText($"{workflow.Name}.json", configString);
+        }   
     } 
 }
