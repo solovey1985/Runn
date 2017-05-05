@@ -23,11 +23,14 @@ namespace Runner.Workflows
     public partial class WorkflowsPage : Page
     {
         public event EventHandler<TaskConfig> TaskAdded;
+        public event EventHandler<TaskConfig> TaskRemoved;
         public WorkflowsPage(WorkflowViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
             TaskAdded += vm.OnTaskAddedHandler;
+            TaskRemoved += vm.OnTaskRemovedHandler;
+            
         }
 
         private void TaskList_MouseDown(object sender, MouseButtonEventArgs e)
@@ -40,6 +43,8 @@ namespace Runner.Workflows
                 DragDrop.DoDragDrop(sourceList, item, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
+
+
 
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
@@ -71,6 +76,20 @@ namespace Runner.Workflows
             {
                 panel.Children.Remove(button);
             }
+        }
+        private void TaskList_DoubleClick(object sender, MouseButtonEventArgs args)
+        {
+            var item = sender as ListBoxItem;
+            if (item == null) return;
+            var task = item.DataContext as TaskConfig;
+            if (task == null) return;
+            OnTaskAdded(task);
+            args.Handled = true;
+        }
+        
+        private void OnTaskRemoved(TaskConfig task)
+        {
+            TaskRemoved(this, task);
         }
     }
 }

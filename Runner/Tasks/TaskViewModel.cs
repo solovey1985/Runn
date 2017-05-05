@@ -10,10 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Runner.Shared.Credentials;
+using Runner.ViewModels;
 
 namespace Runner.Tasks
 {
-    public class TaskViewModel : INotifyPropertyChanged
+    public class TaskViewModel : BaseViewModel
     {
        IConfigurationService _confgService;
 
@@ -80,6 +81,7 @@ namespace Runner.Tasks
                                     case "File": CurrentTask.PathToFile = dialog.FileName; break;
                                     case "Util": CurrentTask.PathToUtil = dialog.FileName; break;
                                 }
+                                OnPropertyChanged("CurrentTask");
                             }
                         })); }
         }
@@ -117,10 +119,6 @@ namespace Runner.Tasks
         public TaskConfig CurrentTask { get { return _currentTask; }
             set { _currentTask = value; OnPropertyChanged("CurrentTask"); } }
         public CredentialsModel Credentials { get; set; }
-        private void OnPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
         public ObservableCollection<ComboData<TaskType>> TaskTypes { get; set; }
         public ObservableCollection<ComboData<GitOperation>> GitOperations { get; set; }
         public void OnTaskChanged(TaskConfig config)

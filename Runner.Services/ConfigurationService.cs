@@ -10,27 +10,24 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using Runner.Services.Workflows;
+using Runner.Services.Framework;
 
 namespace Runner.Services
 {
     public class ConfigurationService : BaseService, IDisposable, IConfigurationService
     {
+        private const string workflowDir = "workflows";
         string _path;
-   
         public string Path
         {
             get{ return _path; }
             set{ _path = value; }
         }
-
         public ConfigurationService(){}
-   
-
         public void Dispose()
         {
            
         }
-
         public override void PostRun(Models.TaskConfig taskConfig)
         {
             
@@ -70,8 +67,24 @@ namespace Runner.Services
         }
         public void SaveWorkflow(string name, Workflow workflow)
         {
+            FileSystemHelper.ExistOrCreateDirectory(workflowDir);
             var configString = JsonConvert.SerializeObject(workflow, GetSerializingSetting());
-            File.WriteAllText($"{workflow.Name}.json", configString);
-        }   
-    } 
+            File.WriteAllText($"{workflowDir}\\{workflow.Name}.json", configString);
+        }
+
+        public Workflow LoadWorkflow(string name)
+        {
+            var workflowString = File.ReadAllText($"{workflowDir}\\{name}.json");
+            return JsonConvert.DeserializeObject<Workflow>(workflowString);
+        }
+
+        public List<string> GetAllWorkflows()
+        {
+            return Directory.GetFiles(workflowDir).Select(x => x.Replace(".json", string.Empty).Replace($"{workflowDir}\\", string.Empty)).ToList();
+        }
+
+        #region Private Methods
+
+        #endregion
+    }
 }

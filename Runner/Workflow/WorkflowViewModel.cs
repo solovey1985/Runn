@@ -6,38 +6,64 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using WF = Runner.Services.Workflows.Workflow;
 using System.Text;
 using System.Threading.Tasks;
-using Workflow = Runner.Services.Workflows.Workflow;
+using Runner.Commands;
+
 namespace Runner.Workflows
 {
-    public class WorkflowViewModel: BaseViewModel
+    public partial class WorkflowViewModel: BaseViewModel
     {
         IConfigurationService configService;
         public WorkflowViewModel(IConfigurationService _configurationService) {
             configService = _configurationService;
             Tasks = new ObservableCollection<TaskConfig>(configService.ReadConfigurationFromFile("config.json"));
-            Workflow = new Workflow();
-            Workflow.Name = "Daily routine";
-            Workflow.Steps = new List<WorkflowStep>();
-            Workflow.Id = 1;
+            Workflow = configService.LoadWorkflow("Daily routine");
+            WorkflowsList = configService.GetAllWorkflows();
+            OnPropertyChanged("Workflow");
+            OnPropertyChanged("Workflow.Steps");
         }
-
+        
+        #region Properties
         public string Name { get; set; }
         public ObservableCollection<TaskConfig> Tasks { get; set; }
+        private ObservableCollection<WorkflowStep> steps;
+        public ObservableCollection<WorkflowStep> Steps { get { return steps ?? (steps = new ObservableCollection<WorkflowStep>(Workflow.Steps)); } }
         public TaskConfig SelectedTask { get; set; }
         public ObservableCollection<TaskConfig> WorkflowTasks { get; set; }
-        public Workflow Workflow { get; set; }
+        public WF Workflow { get; set; }
+        public List<string> WorkflowsList { get; set; }
+        #endregion
+              
+        public void OnWorkflowChanged(object sender, EventArgs args)
+        {
+            configService.LoadWorkflow(args.ToString());
+        }
         public void OnTaskAddedHandler (object sender, TaskConfig addedTask)
         {
             if (addedTask != null)
             {
                 int currentOrder = 0;
-                if (Workflow.Steps.Any())
-                { currentOrder = Workflow.Steps.OrderBy(x => x.Order).Last().Order + 1; }
-                Workflow.Steps.Add(new WorkflowStep() { Task = addedTask, Order = currentOrder });
-                configService.SaveWorkflow(Workflow.Name, Workflow);
+                if (steps.Any())
+                { currentOrder = steps.OrderBy(x => x.Order).Last().Order + 1; }
+                steps.Add(new WorkflowStep() { Task = addedTask, Order = currentOrder });
+                OnPropertyChanged("Steps");
             }
         }
+        internal void OnTaskRemovedHandler(object sender, TaskConfig e)
+        {
+            WorkflowStep step = Workflow.Steps.Where(x => x.Task == e).FirstOrDefault();
+            if (step == null) return;
+            Workflow.Steps.Remove(step);
+            OnPropertyChanged("Workflow");
+        }
+
+        #region Private
+        private int GetNewWorkflowId()
+        {
+            return Workflow.Id + 1;
+        }
+        #endregion
     }
 }
