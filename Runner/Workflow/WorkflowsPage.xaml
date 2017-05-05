@@ -8,13 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Workflows">
-<Page.Resources>
-    <Style TargetType="Button">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="MinWidth" Value="75"/>
-        </Style>
-        
-    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
