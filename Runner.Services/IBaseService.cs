@@ -28,7 +28,8 @@ namespace Runner.Services
         void Save(IEnumerable<TaskConfig> configs);
         void SaveWorkflow(string name, Workflow workflow);
         List<string> GetAllWorkflows();
-        Workflow LoadWorkflow(string name);
+        Workflow GetWorkflow(string name);
+        void DeleteWorkflow(Workflow workflow);
     }
     public interface IWorkflowService
     {

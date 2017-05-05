@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using WF = Runner.Services.Workflows.Workflow;
 namespace Runner.Workflows
 {
@@ -33,6 +34,8 @@ namespace Runner.Workflows
                 return saveCommand ?? (saveCommand = new BaseCommand(obj => {
                     Workflow.Steps = steps.ToList();
                     configService.SaveWorkflow(Workflow.Name, Workflow);
+                    WorkflowsList = configService.GetAllWorkflows();
+                    OnPropertyChanged("WorkflowsList");
                 }));
             }
         }
@@ -42,23 +45,50 @@ namespace Runner.Workflows
             get
             {
                 return cancelCommand ?? (cancelCommand = new BaseCommand(obj => {
-                    Workflow = configService.LoadWorkflow(Workflow.Name);
+                    Workflow = configService.GetWorkflow(Workflow.Name);
                 }));
             }
         }
-        public BaseCommand selectionChangedCommand;
-
+        private BaseCommand selectionChangedCommand;
         public BaseCommand SelectionChangedCommand
         {
             get { return selectionChangedCommand ?? ( selectionChangedCommand = new BaseCommand(obj => {
-                Workflow = configService.LoadWorkflow(obj.ToString());
+                if (obj == null) return;
+                Workflow = configService.GetWorkflow(obj.ToString());
                 steps = new ObservableCollection<WorkflowStep>( Workflow.Steps);
                 OnPropertyChanged("Steps");
                 OnPropertyChanged("Workflow");
 
             })); }
         }
-
+        private BaseCommand deleteTaskCommand;
+        public BaseCommand DeleteTaskCommand
+        {
+            get
+            {
+                return deleteTaskCommand ?? (deleteTaskCommand = new BaseCommand(obj => {
+                    var task = obj as WorkflowStep;
+                    if (task == null) return;
+                    steps.Remove(task);
+                    OnPropertyChanged("Steps");
+                }));
+            }
+        }
+        private BaseCommand deleteCommand;
+        public BaseCommand DeleteCommand { get { return deleteCommand ?? (deleteCommand = new BaseCommand(obj => {
+            configService.DeleteWorkflow(Workflow);
+            WorkflowsList = configService.GetAllWorkflows();
+            string firstWorkflow = WorkflowsList.FirstOrDefault();
+            if (!string.IsNullOrEmpty(firstWorkflow))
+            {
+                Workflow = configService.GetWorkflow(firstWorkflow);
+                OnPropertyChanged("WorkflowsList");
+                OnPropertyChanged("Workflow");
+                OnPropertyChanged("Steps");
+                
+            }
+        })); }
+        }
         #endregion
     }
 }

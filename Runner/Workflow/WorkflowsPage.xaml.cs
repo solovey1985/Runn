@@ -32,7 +32,6 @@ namespace Runner.Workflows
             TaskRemoved += vm.OnTaskRemovedHandler;
             
         }
-
         private void TaskList_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ListBox sourceList = (ListBox)(sender);
@@ -43,13 +42,8 @@ namespace Runner.Workflows
                 DragDrop.DoDragDrop(sourceList, item, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
-
-
-
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
-
-          
             TaskConfig dropedItem = (TaskConfig)e.Data.GetData("task");
             if (dropedItem != null)
             {
@@ -62,12 +56,10 @@ namespace Runner.Workflows
                 }
             }
         }
-
         private void OnTaskAdded(TaskConfig task)
         {
             TaskAdded(this, task);
         }
-
         private void TaskButton_DoubleClick(object sender, MouseButtonEventArgs args)
         {
             var button = (Button)sender;
@@ -86,7 +78,6 @@ namespace Runner.Workflows
             OnTaskAdded(task);
             args.Handled = true;
         }
-        
         private void OnTaskRemoved(TaskConfig task)
         {
             TaskRemoved(this, task);

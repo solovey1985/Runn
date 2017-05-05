@@ -26,7 +26,7 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <ComboBox ItemsSource="{Binding WorkflowsList}" Name="cmbxWorkflowList">
+            <ComboBox ItemsSource="{Binding WorkflowsList}"  Name="cmbxWorkflowList" SelectedItem="{Binding Workflow.Name, Mode=TwoWay}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=cmbxWorkflowList, Path=SelectedItem}"/>
@@ -38,6 +38,7 @@
             <Button Content="Add" Command="{Binding AddCommand}"/>
             <Button Content="Save" Command="{Binding SaveCommand}"/>
             <Button Content="Cancel" Command="{Binding CancelCommand}"/>
+            <Button Content="Delete" Command="{Binding DeleteCommand}"/>
         </WrapPanel>
     <StackPanel Grid.Row="1">
             <ListBox Name="namelsbxTasks" MouseDoubleClick="TaskList_DoubleClick"  ItemsSource="{Binding Tasks}">
@@ -68,17 +69,20 @@
                 <TextBox Text="{Binding Workflow.Description}" MinWidth="100" HorizontalAlignment="Right"/>
             </StackPanel>
             <StackPanel  Background="CadetBlue" Name="taskContainer" AllowDrop="True"  Height="250" MinHeight="250" MinWidth="150" DockPanel.Dock="Top" Drop="Canvas_Drop" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <Label>Drop task here in order to execute. Double click to remove.</Label>
-                <DataGrid Name="StepsGrid" ItemsSource="{Binding Steps}" AutoGenerateColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Order" Width="SizeToCells" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
+                <DataGrid Name="StepsGrid" ItemsSource="{Binding Steps}" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray" RowBackground="LightGray" AlternatingRowBackground="White">
+                      <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding DeleteTaskCommand}" CommandParameter="{Binding ElementName=StepsGrid, Path=SelectedItem}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers><DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Order" Width="*" IsReadOnly="True">
+                          <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Order}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Name" Width="SizeToCells" IsReadOnly="True">
+                        <DataGridTemplateColumn Header="Name" Width="4*" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Task.Name}" />
@@ -89,8 +93,5 @@
                 </DataGrid>
             </StackPanel>
         </StackPanel>
-        
-
-
     </Grid>
 </Page>

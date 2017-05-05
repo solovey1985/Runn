@@ -72,7 +72,7 @@ namespace Runner.Services
             File.WriteAllText($"{workflowDir}\\{workflow.Name}.json", configString);
         }
 
-        public Workflow LoadWorkflow(string name)
+        public Workflow GetWorkflow(string name)
         {
             var workflowString = File.ReadAllText($"{workflowDir}\\{name}.json");
             return JsonConvert.DeserializeObject<Workflow>(workflowString);
@@ -81,6 +81,16 @@ namespace Runner.Services
         public List<string> GetAllWorkflows()
         {
             return Directory.GetFiles(workflowDir).Select(x => x.Replace(".json", string.Empty).Replace($"{workflowDir}\\", string.Empty)).ToList();
+        }
+
+        public void DeleteWorkflow(Workflow workflow)
+        {
+            if (workflow == null) return;
+            string pathToDelete = System.IO.Path.Combine(workflowDir, $"{workflow.Name}.json");
+            if (File.Exists(System.IO.Path.Combine(pathToDelete)))
+            {
+                File.Delete(pathToDelete);
+            }
         }
 
         #region Private Methods

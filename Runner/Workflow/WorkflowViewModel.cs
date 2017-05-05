@@ -19,7 +19,7 @@ namespace Runner.Workflows
         public WorkflowViewModel(IConfigurationService _configurationService) {
             configService = _configurationService;
             Tasks = new ObservableCollection<TaskConfig>(configService.ReadConfigurationFromFile("config.json"));
-            Workflow = configService.LoadWorkflow("Daily routine");
+            Workflow = configService.GetWorkflow(configService.GetAllWorkflows().FirstOrDefault());
             WorkflowsList = configService.GetAllWorkflows();
             OnPropertyChanged("Workflow");
             OnPropertyChanged("Workflow.Steps");
@@ -38,7 +38,7 @@ namespace Runner.Workflows
               
         public void OnWorkflowChanged(object sender, EventArgs args)
         {
-            configService.LoadWorkflow(args.ToString());
+            configService.GetWorkflow(args.ToString());
         }
         public void OnTaskAddedHandler (object sender, TaskConfig addedTask)
         {
