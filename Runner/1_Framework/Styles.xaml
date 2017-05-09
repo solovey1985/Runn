@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Runner.Framework">
+
+    <Style BasedOn="{StaticResource  MaterialDesignRaisedAccentButton}" TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="2"></Setter>
+    </Style>
+    <Style  x:Key="MainContainerStyle" TargetType="FrameworkElement">
+        <Setter Property="Margin" Value="5"></Setter>
+    </Style>
+    <Style  x:Key="ContainerStyle" TargetType="FrameworkElement">
+        <Setter Property="Margin" Value="2"></Setter>
+    </Style>
+</ResourceDictionary>

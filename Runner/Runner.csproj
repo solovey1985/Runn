@@ -124,6 +124,10 @@
     </Compile>
     <Compile Include="Workflow\WorkflowViewModel.commands.cs" />
     <Compile Include="Workflow\WorkflowViewModel.cs" />
+    <Page Include="1_Framework\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Configuration\ConfigurationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

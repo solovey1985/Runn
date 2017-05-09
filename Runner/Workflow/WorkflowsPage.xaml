@@ -3,13 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Runner.Workflows"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Workflows">
-
-    <Grid>
+    
+     <Grid Style="{StaticResource ContainerStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -20,7 +21,7 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <ComboBox ItemsSource="{Binding WorkflowsList}"  Name="cmbxWorkflowList" SelectedItem="{Binding Workflow.Name, Mode=TwoWay}">
+            <ComboBox ItemsSource="{Binding WorkflowsList}"  materialDesign:HintAssist.Hint="Workflows" Style="{StaticResource MaterialDesignFloatingHintComboBox}"  Name="cmbxWorkflowList" SelectedItem="{Binding Workflow.Name, Mode=TwoWay}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=cmbxWorkflowList, Path=SelectedItem}"/>
@@ -28,14 +29,19 @@
                 </i:Interaction.Triggers>
             </ComboBox>
         </StackPanel>
-        <WrapPanel Grid.Column="1" Name="ToolBarPanel">
+        <WrapPanel Grid.Column="1" Name="ToolBarPanel" Style="{StaticResource ContainerStyle}">
             <Button Content="Add" Command="{Binding AddCommand}"/>
             <Button Content="Save" Command="{Binding SaveCommand}"/>
             <Button Content="Cancel" Command="{Binding CancelCommand}"/>
             <Button Content="Delete" Command="{Binding DeleteCommand}"/>
+            
         </WrapPanel>
-    <StackPanel Grid.Row="1">
-            <ListBox Name="namelsbxTasks" MouseDoubleClick="TaskList_DoubleClick"  ItemsSource="{Binding Tasks}">
+        <StackPanel Grid.Row="1" Style="{StaticResource ContainerStyle}">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <materialDesign:PackIcon Kind="FormatListBulletedType" VerticalAlignment="Center"/>
+                <Label Content="Avaliable Tasks"  Style="{StaticResource MaterialDesignLabel}"/>
+            </StackPanel>
+            <ListBox Style="{StaticResource ContainerStyle}" materialDesign:HintAssist.Hint="Avaliable Tasks" Name="namelsbxTasks" MouseDoubleClick="TaskList_DoubleClick"  ItemsSource="{Binding Tasks}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <EventSetter Event="MouseDoubleClick" Handler="TaskList_DoubleClick" />
@@ -52,19 +58,42 @@
                     </DataTemplate>    
                 </ListBox.ItemTemplate>
         </ListBox>
-    </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1" >
-            <StackPanel Orientation="Horizontal">
-                <Label>Name</Label>
-                <TextBox Text="{Binding Workflow.Name}" MinWidth="75"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label>Description</Label>
-                <TextBox Text="{Binding Workflow.Description}" MinWidth="100" HorizontalAlignment="Right"/>
-            </StackPanel>
-            <StackPanel  Background="CadetBlue" Name="taskContainer" AllowDrop="True"  Height="250" MinHeight="250" MinWidth="150" DockPanel.Dock="Top" Drop="Canvas_Drop" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <DataGrid Name="StepsGrid" ItemsSource="{Binding Steps}" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray" RowBackground="LightGray" AlternatingRowBackground="White">
-                      <i:Interaction.Triggers>
+    </StackPanel >
+        <StackPanel Grid.Row="1" Grid.Column="1"  Style="{StaticResource ContainerStyle}">
+
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Workflow.Name}"
+                 Margin="0 8 0 8">
+                <materialDesign:HintAssist.Hint>
+                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                        <materialDesign:PackIcon Kind="Information" />
+                        <TextBlock>Name</TextBlock>
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
+            </TextBox>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Workflow.Description}" 
+               TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="8 0 0 0"
+                 MinWidth="280"
+                 VerticalContentAlignment="Top"    
+                 AcceptsReturn="True"                 
+                 VerticalScrollBarVisibility="Auto"
+                 SpellCheck.IsEnabled="True"
+                 Height="80">
+                <materialDesign:HintAssist.Hint>
+                    <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                        <materialDesign:PackIcon Kind="Information" />
+                        <TextBlock>Description</TextBlock>
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
+            </TextBox>
+            <DockPanel Margin="0 0 0 5" Style="{StaticResource ContainerStyle}" Name="taskContainer" AllowDrop="True"  MinHeight="250" MinWidth="150" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Label DockPanel.Dock="Top" Content="Steps" Style="{StaticResource MaterialDesignLabel}"></Label>
+                <DataGrid Name="StepsGrid" ItemsSource="{Binding Steps}" 
+                          DockPanel.Dock="Top"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                          ScrollViewer.CanContentScroll="True"
+                          AutoGenerateColumns="False" 
+                         >
+                    <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">
                             <i:InvokeCommandAction Command="{Binding DeleteTaskCommand}" CommandParameter="{Binding ElementName=StepsGrid, Path=SelectedItem}"/>
                                 </i:EventTrigger>
@@ -85,7 +114,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-            </StackPanel>
+            </DockPanel>
         </StackPanel>
     </Grid>
 </Page>
