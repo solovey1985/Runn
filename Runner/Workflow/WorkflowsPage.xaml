@@ -35,12 +35,13 @@
             <Button Content="Delete" Command="{Binding DeleteCommand}"/>
             
         </WrapPanel>
-        <StackPanel Grid.Row="1" Style="{StaticResource ContainerStyle}">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+        <DockPanel Grid.Row="1" Style="{StaticResource ContainerStyle}">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
             <materialDesign:PackIcon Kind="FormatListBulletedType" VerticalAlignment="Center"/>
                 <Label Content="Avaliable Tasks"  Style="{StaticResource MaterialDesignLabel}"/>
             </StackPanel>
-            <ListBox Style="{StaticResource ContainerStyle}" materialDesign:HintAssist.Hint="Avaliable Tasks" Name="namelsbxTasks" MouseDoubleClick="TaskList_DoubleClick"  ItemsSource="{Binding Tasks}">
+                
+        <ListBox DockPanel.Dock="Top"  Style="{StaticResource ContainerStyle}" materialDesign:HintAssist.Hint="Avaliable Tasks" Name="namelsbxTasks" MouseDoubleClick="TaskList_DoubleClick"  ItemsSource="{Binding Tasks}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <EventSetter Event="MouseDoubleClick" Handler="TaskList_DoubleClick" />
@@ -57,7 +58,8 @@
                     </DataTemplate>    
                 </ListBox.ItemTemplate>
         </ListBox>
-    </StackPanel >
+                
+            </DockPanel >
         <DockPanel Grid.Row="1" Grid.Column="1"  Style="{StaticResource ContainerStyle}">
 
             <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Workflow.Name}"
@@ -73,9 +75,7 @@
                TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="0 8 0 0"
                 DockPanel.Dock="Top"
                  MinWidth="280"
-                 VerticalContentAlignment="Top"    
                  AcceptsReturn="True"                 
-                 VerticalScrollBarVisibility="Auto"
                  SpellCheck.IsEnabled="True"
                  MinLines="2">
                 <materialDesign:HintAssist.Hint>
