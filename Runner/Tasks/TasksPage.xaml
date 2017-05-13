@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Runner.Tasks"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:converters="clr-namespace:Runner.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="300"
@@ -33,7 +34,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Command="{Binding AddCommand}" Style="{DynamicResource MaterialDesignFloatingActionButton}">Add task</Button>
+            <Button Command="{Binding AddCommand}">Add task</Button>
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="1" Margin="2 0">
             <Grid.ColumnDefinitions>
@@ -47,32 +48,62 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel>
-                <Label>Type</Label>
-                <ComboBox Name="cmbxTaskType" ItemsSource="{Binding TaskTypes}" DisplayMemberPath="Text" 
-                                        SelectedValuePath="Value" SelectedValue="{Binding CurrentTask.Type}"
-                          IsSynchronizedWithCurrentItem="True"
-                          >
-
-                </ComboBox>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Margin="2" Height="Auto">
-                <Label>Name</Label>
-                <TextBox Name="txbxName"  Text="{Binding CurrentTask.Name}" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
-            </StackPanel>
-            <StackPanel Margin="0 " Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label>Description</Label>
-                <TextBox Foreground="{DynamicResource MaterialDesignPaper}" MinLines="2" Name="txbxDescription" Text="{Binding CurrentTask.Description}"></TextBox>
-            </StackPanel>
+                
+                <ComboBox Name="cmbxTaskType" Margin="0 9 2 2"
+                             VerticalAlignment="Top"
+                              materialDesign:HintAssist.Hint="Type" 
+                              ItemsSource="{Binding TaskTypes}" 
+                              DisplayMemberPath="Text" 
+                              SelectedValuePath="Value" 
+                              SelectedValue="{Binding CurrentTask.Type}"
+                              IsSynchronizedWithCurrentItem="True">
+                    </ComboBox>
+                <TextBox MinWidth="75" 
+                         VerticalAlignment="Top"
+                        Grid.Column="1"
+                         Name="txbxName" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Text="{Binding CurrentTask.Name}" >
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel Orientation="Horizontal" Margin="0">
+                                <materialDesign:PackIcon Kind="Information" />
+                                <TextBlock>Name</TextBlock>
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
+                <TextBox Grid.ColumnSpan="2" Grid.Row="1" Name="txbxDescription"
+                          MinLines="2"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                          Text="{Binding CurrentTask.Description}">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Information" />
+                            <TextBlock>Description</TextBlock>
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+     
             <StackPanel Margin="2" Grid.Row="3" Grid.ColumnSpan="2">
-                <DockPanel  HorizontalAlignment="Stretch" Height="26" VerticalAlignment="Top">
-                    <Label >Path to file</Label>
-                    <Button Command="{Binding ShowFileDialog}" CommandParameter="File">Select File</Button>
+                <DockPanel  HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignCaptionTextBlock}">
+                        <materialDesign:PackIcon Kind="FileCheck"></materialDesign:PackIcon>
+                        <Label>Path to file</Label>    
+                    </TextBlock>
+                    
+                    <Button Width="24" Height="24"
+                        Command="{Binding ShowFileDialog}" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" CommandParameter="File">
+                        <materialDesign:PackIcon Kind="Apps" Height="16" Width="16"/>
+                    </Button>
                 </DockPanel>
                 <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToFile" Text="{Binding CurrentTask.PathToFile}"></TextBlock>
                 <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <Label >Path to utility</Label>
-                    <Button Command="{Binding ShowFileDialog}" CommandParameter="Util">Select File</Button>
+                    <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignCaptionTextBlock}">
+                       <materialDesign:PackIcon Kind="FileXml" />
+                        <Label>Path to utility</Label>
+                    </TextBlock>
+                    <Button Width="24" Height="24" Command="{Binding ShowFileDialog}" CommandParameter="Util" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" >
+                        <materialDesign:PackIcon Kind="Apps" Height="16" Width="16"/>
+                    </Button>
                 </DockPanel>
                 <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToUtil" Text="{Binding CurrentTask.PathToUtil}"></TextBlock>
                 <StackPanel Name="gitRemote"  Visibility="{Binding CurrentTask, Converter={StaticResource TaskTypeVisibilityConverter}}">

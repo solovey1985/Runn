@@ -8,8 +8,7 @@
       xmlns:local="clr-namespace:Runner.Workflows"
       mc:Ignorable="d" 
       Title="Workflows">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid Style="{StaticResource ContainerStyle}">
+    <Grid Style="{StaticResource ContainerStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -116,5 +115,5 @@
             </DockPanel>
         </DockPanel>
     </Grid>
-</ScrollViewer>
+
 </Page>

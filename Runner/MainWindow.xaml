@@ -6,11 +6,7 @@
         xmlns:local="clr-namespace:Runner"
         mc:Ignorable="d"
         Icon="/Assets/icon.png"
-        Title="MainWindow" 
-        MinHeight="360" MinWidth="480"
-        Height="360"
-        Width="480"
->
+        Title="MainWindow">
        
    
 </NavigationWindow>
