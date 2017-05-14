@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Runner"
         mc:Ignorable="d"
-        SizeToContent="Height"
-            Title="MainWindow" MinHeight="450" MinWidth="525">
+        Icon="/Assets/icon.png"
+        Title="MainWindow">
        
    
 </NavigationWindow>
