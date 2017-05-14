@@ -95,7 +95,9 @@
                         <materialDesign:PackIcon Kind="Apps" Height="16" Width="16"/>
                     </Button>
                 </DockPanel>
-                <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToFile" Text="{Binding CurrentTask.PathToFile}"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="1" 
+                           ToolTip="{Binding CurrentTask.PathToFile}"
+                           Style="{StaticResource MaterialDesignSubheadingTextBlock}" Name="txblPathToFile" Text="{Binding CurrentTask.PathToFile}"></TextBlock>
                 <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <TextBlock VerticalAlignment="Center" Style="{StaticResource MaterialDesignCaptionTextBlock}">
                        <materialDesign:PackIcon Kind="FileXml" />
@@ -105,7 +107,9 @@
                         <materialDesign:PackIcon Kind="Apps" Height="16" Width="16"/>
                     </Button>
                 </DockPanel>
-                <TextBlock Grid.Row="4" Grid.Column="1" Name="txblPathToUtil" Text="{Binding CurrentTask.PathToUtil}"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Name="txblPathToUtil" 
+                           ToolTip="{Binding CurrentTask.PathToUtil}"
+                           Text="{Binding CurrentTask.PathToUtil}"></TextBlock>
                 <StackPanel Name="gitRemote"  Visibility="{Binding CurrentTask, Converter={StaticResource TaskTypeVisibilityConverter}}">
                     <Label>Repository URL</Label>
                     <TextBox Text="{Binding CurrentTask.RemoteRepo}"></TextBox>
