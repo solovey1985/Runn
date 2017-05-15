@@ -74,6 +74,7 @@
     <Compile Include="ConfigurationService.cs" />
     <Compile Include="CryptoService.cs" />
     <Compile Include="Framework\FileSystemHelper.cs" />
+    <Compile Include="Framework\ProcessHelper.cs" />
     <Compile Include="GitService.cs" />
     <Compile Include="IBaseService.cs" />
     <Compile Include="Models\GitTask.cs" />
