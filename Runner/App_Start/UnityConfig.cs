@@ -22,9 +22,10 @@ namespace Runner.App_Start
             container.RegisterType<ISimpleTaskService, SimpleTaskService>();
             container.RegisterType<IConfigurationService, ConfigurationService>();
             container.RegisterType<IPowerShellService, PowerShellService>();
+            container.RegisterType<IWorkflowService, WorkflowService>();
 
-            
-     
+
+
             return container;
         }
     }

@@ -15,9 +15,13 @@ namespace Runner.Workflows
 {
     public partial class WorkflowViewModel: BaseViewModel
     {
-        IConfigurationService configService;
-        public WorkflowViewModel(IConfigurationService _configurationService) {
+        private IConfigurationService configService;
+        private IWorkflowService workflowService;
+        public WorkflowViewModel(IConfigurationService _configurationService, IWorkflowService _workflowService) {
+
             configService = _configurationService;
+            workflowService = _workflowService;
+
             Tasks = new ObservableCollection<TaskConfig>(configService.ReadConfigurationFromFile("config.json"));
             Workflow = configService.GetWorkflow(configService.GetAllWorkflows().FirstOrDefault());
             WorkflowsList = configService.GetAllWorkflows();
@@ -59,6 +63,10 @@ namespace Runner.Workflows
             OnPropertyChanged("Workflow");
         }
 
+        internal void OnWorkflowRunHandler(object sender, EventArgs e)
+        {
+            
+        }
         #region Private
         private int GetNewWorkflowId()
         {

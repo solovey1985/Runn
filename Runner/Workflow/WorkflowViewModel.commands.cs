@@ -89,6 +89,16 @@ namespace Runner.Workflows
             }
         })); }
         }
+        private BaseCommand runCommand;
+        public BaseCommand RunCommand
+        {
+            get
+            {
+                return runCommand ?? (runCommand = new BaseCommand(obj => {
+                                                                       workflowService.Run(Workflow);
+                                                                   }));
+            }
+        }
         #endregion
     }
 }

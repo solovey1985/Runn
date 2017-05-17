@@ -32,6 +32,7 @@
             <Button Content="Save" Command="{Binding SaveCommand}"/>
             <Button Content="Cancel" Command="{Binding CancelCommand}"/>
             <Button Content="Delete" Command="{Binding DeleteCommand}"/>
+            <Button Content="Run" Command="{Binding RunCommand}"/>
             
         </WrapPanel>
         <DockPanel Grid.Row="1" Style="{StaticResource ContainerStyle}">

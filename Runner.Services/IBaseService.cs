@@ -33,5 +33,6 @@ namespace Runner.Services
     }
     public interface IWorkflowService
     {
+        void Run(Workflow workflow);
     }
 }
