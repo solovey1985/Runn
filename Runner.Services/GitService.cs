@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LibGit2Sharp;
 using Runner.Services.Models;
 using LibGit2Sharp.Handlers;
+using LibGit2Sharp.Core;
 using Runner.Services;
 
 namespace Runner.Services
@@ -29,15 +30,18 @@ namespace Runner.Services
             GitTask config = taskConfig as GitTask;
             if (config == null)
                 config = CurrentTask;
-            if (config != null)
+            switch (config.Operation)
             {
-                Pull(config);
+                    case GitOperation.Pull: { Pull(config); break;}
+                    case GitOperation.Fetch: { Fetch(config); break; }
+                    case GitOperation.Commit: { break; }
+                    case GitOperation.Push: {Push(config); break; }
             }
             return false;
             
         }
 
-        private void GitPush(GitTask config)
+        private void Push(GitTask config)
         {
             using (var repo = new Repository(config.PathToFile))
             {
@@ -65,9 +69,32 @@ namespace Runner.Services
                             Username = taskConfig.UserName,
                             Password = CryptoService.Decrypt(taskConfig.Password)
                         });
-                repo.Network.Pull(new LibGit2Sharp.Signature(taskConfig.UserName, taskConfig.UserName, new DateTimeOffset(DateTime.Now)), options);
+                Fetch(taskConfig);
+                Commands.Pull(repo, new Signature(taskConfig.UserName, taskConfig.UserName, DateTimeOffset.Now), options);
             }
         }
+
+        public void Fetch(GitTask taskConfig)
+        {
+            string logMessage = "";
+            using(var repo = new Repository(taskConfig.PathToFile))
+            {
+                FetchOptions options = new FetchOptions();
+                options.CredentialsProvider = new CredentialsHandler((url, usernameFromUrl, types) =>
+                    new UsernamePasswordCredentials()
+                    {
+                        Username = taskConfig.UserName,
+                        Password = CryptoService.Decrypt(taskConfig.Password)
+                    });
+
+                foreach (Remote remote in repo.Network.Remotes)
+                {
+                    IEnumerable<string> refSpecs = remote.FetchRefSpecs.Select(x => x.Specification);
+                    Commands.Fetch(repo, remote.Name, refSpecs, null, logMessage);
+                }
+            }
+        }
+
         private PushOptions GetPushOptions()
         {
             return new PushOptions();

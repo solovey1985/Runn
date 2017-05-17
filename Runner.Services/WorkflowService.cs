@@ -11,7 +11,12 @@ namespace Runner.Services
     public class WorkflowService : IWorkflowService
     {
         private ConfigurationService _configService;
-        public WorkflowService() { }
+
+        public WorkflowService()
+        {
+            _configService = new ConfigurationService();
+            _configService.Path = "config.json";
+        }
 
         public void Run(Workflow workflow)
         {

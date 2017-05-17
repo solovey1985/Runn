@@ -48,7 +48,7 @@ namespace Runner.Services
         public T GetTaskById<T>(int id) where T : TaskConfig
         {
             string configStr = File.ReadAllText(Path);
-           List<T> configs =  JsonConvert.DeserializeObject<List<T>>(configStr, GetSerializingSetting());
+           List<TaskConfig> configs =  JsonConvert.DeserializeObject<List<TaskConfig>>(configStr, GetSerializingSetting());
             return (T)configs.FirstOrDefault(c => c.Id==id);
         }
 
