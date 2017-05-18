@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using WF = Runner.Services.Workflows.Workflow;
@@ -90,15 +91,28 @@ namespace Runner.Workflows
         })); }
         }
         private BaseCommand runCommand;
+
         public BaseCommand RunCommand
         {
             get
             {
-                return runCommand ?? (runCommand = new BaseCommand(obj => {
-                                                                       workflowService.Run(Workflow);
+                return runCommand ?? (runCommand = new BaseCommand(obj =>
+                                                                   {
+                                                                       Workflow.IsRunning = true;
+                                                                       OnPropertyChanged("Workflow");
+                                                                       Task.Factory
+                                                                           .StartNew(() => workflowService.Run(Workflow))
+                                                                           .ContinueWith((t) =>
+                                                                                         {
+                                                                                             Workflow.IsRunning = false;
+                                                                                             OnPropertyChanged("Workflow");
+                                                                                         });
+
                                                                    }));
             }
         }
+
+
         #endregion
     }
 }

@@ -5,9 +5,28 @@
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:converters="clr-namespace:Runner.Converters"
       xmlns:local="clr-namespace:Runner.Workflows"
       mc:Ignorable="d" 
       Title="Workflows">
+    <Page.Resources>
+        <converters:WorkflowToVisibilityConverter x:Key="WorkflowVisibilityConverter"></converters:WorkflowToVisibilityConverter>
+    </Page.Resources>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetName="DeterminateCircularProgress" TargetProperty="Value" RepeatBehavior="Forever" Duration="0:0:3">
+                        <DoubleAnimation From="0" To="100" Duration="0:0:2.5" FillBehavior="Stop">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
     <Grid Style="{StaticResource ContainerStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -32,8 +51,10 @@
             <Button Content="Save" Command="{Binding SaveCommand}"/>
             <Button Content="Cancel" Command="{Binding CancelCommand}"/>
             <Button Content="Delete" Command="{Binding DeleteCommand}"/>
-            <Button Content="Run" Command="{Binding RunCommand}"/>
-            
+            <Button Command="{Binding RunCommand}">Run</Button>
+            <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Visibility="{Binding Workflow, Converter={StaticResource WorkflowVisibilityConverter}}"
+                                            x:Name="DeterminateCircularProgress"
+                                                VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12 12 12 12" />
         </WrapPanel>
         <DockPanel Grid.Row="1" Style="{StaticResource ContainerStyle}">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
@@ -42,20 +63,23 @@
             </StackPanel>
                 
         <ListBox DockPanel.Dock="Top"  Style="{StaticResource ContainerStyle}" materialDesign:HintAssist.Hint="Avaliable Tasks" Name="namelsbxTasks" MouseDoubleClick="TaskList_DoubleClick"  ItemsSource="{Binding Tasks}">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListBoxItem}">
-                        <EventSetter Event="MouseDoubleClick" Handler="TaskList_DoubleClick" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                
-                            <StackPanel HorizontalAlignment="Stretch">
-                                <Label Content="{Binding Name}"></Label>
-                                <Label Content="{Binding Order}"></Label>
+                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" >
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"  PreviewMouseDown="TaskList_DoubleClick">
+                                <materialDesign:PackIcon Kind="PlusBox" Height="24" Width="24"></materialDesign:PackIcon>
+                            </Button>
                             </StackPanel>
-                
-                    </DataTemplate>    
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Right" Grid.IsSharedSizeScope="True">
+                                <Label  Content="{Binding Name}" FontSize="18"></Label>
+                            </StackPanel>
+                        </Grid>
+    </DataTemplate>    
                 </ListBox.ItemTemplate>
         </ListBox>
                 
@@ -92,11 +116,12 @@
                           AutoGenerateColumns="False" 
                     
                          >
-                    <i:Interaction.Triggers>
+                            <!--<i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">
                             <i:InvokeCommandAction Command="{Binding DeleteTaskCommand}" CommandParameter="{Binding ElementName=StepsGrid, Path=SelectedItem}"/>
                                 </i:EventTrigger>
-                            </i:Interaction.Triggers><DataGrid.Columns>
+                            </i:Interaction.Triggers>-->
+                       <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Order" Width="*" IsReadOnly="True">
                           <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -107,7 +132,18 @@
                         <DataGridTemplateColumn Header="Name" Width="4*" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Task.Name}" />
+                                    <TextBlock Text="{Binding Task.Name}" FontSize="18" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Action" Width="2*" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"  PreviewMouseDown="RemoveTask_From_Workflow" HorizontalAlignment="Right">
+                                        <materialDesign:PackIcon Kind="MinusCircle" Height="24" Width="24"></materialDesign:PackIcon>
+                                    </Button>
+                                    </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -118,3 +154,4 @@
     </Grid>
 
 </Page>
+

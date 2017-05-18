@@ -1,4 +1,5 @@
 ﻿using Runner.Services.Models;
+using Runner.Services.Workflows;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,6 +27,28 @@ namespace Runner.Converters
                     return Visibility.Collapsed;
                 }
             }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Visibility visibility = (Visibility)value;
+
+            if (visibility == Visibility.Visible)
+                return true;
+            else
+                return false;
+        }
+    }
+
+    public class WorkflowToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Workflow workflow = (Workflow)value;
+            if (workflow.IsRunning)
+             return Visibility.Visible;
+
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

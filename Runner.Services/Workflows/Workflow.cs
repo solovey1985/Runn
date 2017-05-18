@@ -9,6 +9,7 @@ namespace Runner.Services.Workflows
         public string Name { get; set; }
         public string Description { get; set; }
         public List<WorkflowStep> Steps { get; set; }
+        public bool IsRunning { get; set; }
 
         public bool Validate(){
             bool result = false;

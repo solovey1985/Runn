@@ -23,7 +23,7 @@ namespace Runner.Workflows
     public partial class WorkflowsPage : Page
     {
         public event EventHandler<TaskConfig> TaskAdded;
-        public event EventHandler<TaskConfig> TaskRemoved;
+        public event EventHandler<WorkflowStep> TaskRemoved;
         public WorkflowsPage(WorkflowViewModel vm)
         {
             InitializeComponent();
@@ -42,26 +42,24 @@ namespace Runner.Workflows
                 DragDrop.DoDragDrop(sourceList, item, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
-        private void Canvas_Drop(object sender, DragEventArgs e)
-        {
-            TaskConfig dropedItem = (TaskConfig)e.Data.GetData("task");
-            if (dropedItem != null)
-            {
-                Button newTask = new Button() { Content = dropedItem.Name, Height = 25 };
-                newTask.MouseDoubleClick += TaskButton_DoubleClick;
-                taskContainer.Children.Add(newTask);
-                if (TaskAdded != null)
-                {
-                    OnTaskAdded(dropedItem);
-                }
-            }
-        }
         private void OnTaskAdded(TaskConfig task)
         {
             TaskAdded(this, task);
         }
+
+        private void RemoveTask_From_Workflow(object sender, MouseButtonEventArgs args)
+        {
+            if (args.LeftButton != MouseButtonState.Pressed) return;
+            var item = sender as FrameworkElement;
+            if (item == null) return;
+            var step = item.DataContext as WorkflowStep;
+            if (step == null) return;
+            OnTaskRemoved(step);
+            args.Handled = true;
+        }
         private void TaskButton_DoubleClick(object sender, MouseButtonEventArgs args)
         {
+            if (args.LeftButton != MouseButtonState.Pressed) return;
             var button = (Button)sender;
             StackPanel panel = button.Parent as StackPanel;
             if (panel != null)
@@ -71,14 +69,15 @@ namespace Runner.Workflows
         }
         private void TaskList_DoubleClick(object sender, MouseButtonEventArgs args)
         {
-            var item = sender as ListBoxItem;
+            if(args.LeftButton != MouseButtonState.Pressed) return;
+            var item = sender as FrameworkElement;
             if (item == null) return;
             var task = item.DataContext as TaskConfig;
             if (task == null) return;
             OnTaskAdded(task);
             args.Handled = true;
         }
-        private void OnTaskRemoved(TaskConfig task)
+        private void OnTaskRemoved(WorkflowStep task)
         {
             TaskRemoved(this, task);
         }

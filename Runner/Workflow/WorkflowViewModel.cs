@@ -55,12 +55,12 @@ namespace Runner.Workflows
                 OnPropertyChanged("Steps");
             }
         }
-        internal void OnTaskRemovedHandler(object sender, TaskConfig e)
+        internal void OnTaskRemovedHandler(object sender, WorkflowStep e)
         {
-            WorkflowStep step = Workflow.Steps.Where(x => x.Task == e).FirstOrDefault();
-            if (step == null) return;
-            Workflow.Steps.Remove(step);
+           if(e == null || !Steps.Contains(e)) return;
+            Steps.Remove(e);
             OnPropertyChanged("Workflow");
+            OnPropertyChanged("Steps");
         }
         internal void OnWorkflowRunHandler(object sender, EventArgs e)
         {

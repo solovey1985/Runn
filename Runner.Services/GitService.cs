@@ -11,8 +11,6 @@ using Runner.Services;
 
 namespace Runner.Services
 {
-    
-
     public class GitService : BaseService, IGitService
     {
 
