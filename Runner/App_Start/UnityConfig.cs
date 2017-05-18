@@ -24,8 +24,6 @@ namespace Runner.App_Start
             container.RegisterType<IPowerShellService, PowerShellService>();
             container.RegisterType<IWorkflowService, WorkflowService>();
 
-
-
             return container;
         }
     }

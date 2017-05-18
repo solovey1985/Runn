@@ -42,17 +42,17 @@ namespace Runner.Services
         private IBaseService GetServiceByName(WorkflowStep step)
         {
             IBaseService taskRunner;
-            switch (step.Task.PathToUtil)
+            switch (step.Task.Type)
             {
-                case "cmd.exe": { taskRunner = new SimpleTaskService(); break; }
-                case "powershell.exe": { taskRunner = new PowerShellService(); break; }
-                case "git.exe":
-                    {
-                        taskRunner = new GitService();
-                        ((GitService)taskRunner).CurrentTask = _configService.GetTaskById<GitTask>(step.Task.Id);
-                        
-                        break;
-                    }
+                case TaskType.Executable:
+                case TaskType.CommandLine: 
+                                            { taskRunner = new SimpleTaskService(); break; }
+                case TaskType.PowerShell:   { taskRunner = new PowerShellService(); break; }
+                case TaskType.Git: {
+                                        taskRunner = new GitService();
+                                        ((GitService)taskRunner).CurrentTask = _configService.GetTaskById<GitTask>(step.Task.Id);
+                                        break;
+                                    }
                 default: { taskRunner = new SimpleTaskService(); break; }
               }
             return taskRunner;

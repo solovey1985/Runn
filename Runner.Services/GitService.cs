@@ -46,13 +46,10 @@ namespace Runner.Services
             using (var repo = new Repository(config.PathToFile))
             {
                 PushOptions options = new PushOptions();
-
-                options.CredentialsProvider = new CredentialsHandler(
-                                                                     (url, usernameFromUrl, types) =>
-                                                                             GetCredentials(config));
+                options.CredentialsProvider = new CredentialsHandler( (url, usernameFromUrl, types) =>
+                                                                                GetCredentials(config));
                 var remote = repo.Network.Remotes["origin"];
-                repo.Network.Push(remote, @"refs/heads/develop", options);
-                
+                repo.Network.Push(remote, @"refs/heads/master", options);
             }
         }
 
@@ -76,7 +73,6 @@ namespace Runner.Services
 
         public void Fetch(GitTask taskConfig)
         {
-            string logMessage = "";
             using(var repo = new Repository(taskConfig.PathToFile))
             {
                 FetchOptions options = new FetchOptions();
@@ -90,11 +86,21 @@ namespace Runner.Services
                 foreach (Remote remote in repo.Network.Remotes)
                 {
                     IEnumerable<string> refSpecs = remote.FetchRefSpecs.Select(x => x.Specification);
-                    Commands.Fetch(repo, remote.Name, refSpecs, null, logMessage);
+                    Commands.Fetch(repo, remote.Name, refSpecs, null, "");
                 }
             }
         }
+        public override void PostRun(Models.TaskConfig taskConfig)
+        {
 
+        }
+
+        public override void PreRun(Models.TaskConfig taskConfig)
+        {
+
+        }
+
+        #region Private methods
         private PushOptions GetPushOptions()
         {
             return new PushOptions();
@@ -112,15 +118,7 @@ namespace Runner.Services
             }
             return new UsernamePasswordCredentials();
         }
-
-        public override void PostRun(Models.TaskConfig taskConfig)
-        {
-            
-        }
-
-        public override void PreRun(Models.TaskConfig taskConfig)
-        {
-            
-        }
+        #endregion
+        
     }
 }

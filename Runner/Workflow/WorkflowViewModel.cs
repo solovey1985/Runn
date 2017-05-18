@@ -62,11 +62,11 @@ namespace Runner.Workflows
             Workflow.Steps.Remove(step);
             OnPropertyChanged("Workflow");
         }
-
         internal void OnWorkflowRunHandler(object sender, EventArgs e)
         {
             
         }
+
         #region Private
         private int GetNewWorkflowId()
         {
