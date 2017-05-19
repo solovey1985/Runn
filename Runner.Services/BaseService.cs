@@ -24,19 +24,19 @@ namespace Runner.Services
             Debug.Write(info.WorkingDirectory);
             //Appereance
             info.WindowStyle = ProcessWindowStyle.Normal;
-            info.UseShellExecute = false;
-            info.CreateNoWindow = true;
-            info.RedirectStandardError = true;
-            info.RedirectStandardOutput = true;
+            info.UseShellExecute = true;
+            info.CreateNoWindow = false;
+            info.RedirectStandardError = false;
+            info.RedirectStandardOutput = false;
             
             Process process = new Process();
             process.StartInfo = info;
             process.Start();
             
             //TODO: IN workflows can be useful
-            //process.WaitForExit(); 
+            process.WaitForExit(); 
 
-            process.Close();
+           // process.Close();
             PostRun(taskConfig);
             return false;
         }
