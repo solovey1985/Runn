@@ -36,7 +36,6 @@ namespace Runner.Services
             //TODO: IN workflows can be useful
             
             process.Close();
-            process.Kill();
             PostRun(taskConfig);
             return false;
         }
