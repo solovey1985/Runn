@@ -34,9 +34,9 @@ namespace Runner.Services
             process.Start();
             
             //TODO: IN workflows can be useful
-            process.WaitForExit(); 
-
-           // process.Close();
+            
+            process.Close();
+            process.Kill();
             PostRun(taskConfig);
             return false;
         }

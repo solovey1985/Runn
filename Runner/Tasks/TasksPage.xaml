@@ -7,25 +7,27 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:converters="clr-namespace:Runner.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="300"
       Title="Tasks"
       Background="AliceBlue"
       Margin="5"
       >
      <Page.Resources>
         <converters:TaskToVisibilityConverter x:Key="TaskTypeVisibilityConverter"></converters:TaskToVisibilityConverter>
-      
     </Page.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="48"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+        <WrapPanel Grid.Column="1" Background="MintCream" Margin="2" VerticalAlignment="Stretch" >
+            <Button  Command="" CommandParameter="" Content="Cancel"/>
+            <Button  Command="{Binding SaveCommand}" CommandParameter="CurrentTask" Content="Save"/>
+            <Button x:Name="btnRemove" Command="{Binding RemoveCommand}" Content="Remove"/>
+        </WrapPanel>
         <StackPanel VerticalAlignment="Stretch" Grid.Row="1" Margin="2 0 0 0">
             <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Tasks, Mode=TwoWay}" Name="lsbxTasks"  SelectionChanged="lsbxTasks_SelectionChanged" MinHeight="100">
                 <ListBox.ItemTemplate>
@@ -127,15 +129,10 @@
                     <Button Command="{Binding CredentialsRequiredCommand}">Click to Input</Button>
                 </DockPanel>
                     
-                    <WrapPanel Margin="2" VerticalAlignment="Stretch">
-                    <Button  Command="" CommandParameter="" Content="Cancel"/> 
-                    <Button  Command="{Binding SaveCommand}" CommandParameter="CurrentTask" Content="Save"/>
-                    <Button x:Name="btnRemove" Command="{Binding RemoveCommand}" Content="Remove"/>
-                    </WrapPanel>
+                   
             </StackPanel>
 
         </Grid>
-
     </Grid>
     
 </Page>

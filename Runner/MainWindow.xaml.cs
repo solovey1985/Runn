@@ -32,5 +32,18 @@ namespace Runner
             MainViewModel _viewModel = viewModel; 
             DataContext = _viewModel;
         }
+        public bool ProcessCommandLineArgs(IList<string> args)
+        {
+            if (args == null || args.Count == 0)
+                return true;
+            if ((args.Count > 1))
+            {
+                //the first index always contains the location of the exe so we need to check the second index
+               
+            }
+
+            return true;
+        }
+
     }
 }
