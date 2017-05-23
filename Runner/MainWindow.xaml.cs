@@ -26,6 +26,8 @@ namespace Runner
     /// </summary>
     public partial class MainWindow : NavigationWindow
     {
+        public event  EventHandler<string> TaskRunning;
+        public bool IsHandlerAdded { get { return TaskRunning != null; } }
         public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
@@ -38,11 +40,17 @@ namespace Runner
                 return true;
             if ((args.Count > 1))
             {
-                //the first index always contains the location of the exe so we need to check the second index
-               
+                string taskName = args.Skip(1).Aggregate((i, j)=> i + " " + j).Trim();
+                OnTaskRunning(taskName);
+                
             }
 
             return true;
+        }
+
+        private void OnTaskRunning(string taskName)
+        {
+            TaskRunning(this, taskName);
         }
 
     }

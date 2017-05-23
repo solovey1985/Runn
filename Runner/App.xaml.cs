@@ -73,9 +73,43 @@ namespace Runner
             }
             jumpList.Apply();
         }
+
+    
         public bool SignalExternalCommandLineArgs(IList<string> args)
         {
-            return ((MainWindow)MainWindow).ProcessCommandLineArgs(args);
+            var window = MainWindow as MainWindow;
+            if (window == null) return false;
+            if (!window.IsHandlerAdded)
+            {
+                window.TaskRunning += Window_TaskRunning;
+            }
+            return window.ProcessCommandLineArgs(args);
+        }
+
+        private void Window_TaskRunning(object sender, string e)
+        {
+            IConfigurationService service = container.Resolve<IConfigurationService>();
+            var task = service.ReadConfigurationFromFile("config.json").FirstOrDefault(x=>x.Name == e);
+            if (task == null) return;
+            BaseService taskRunner;
+            switch (task.Type)
+            {
+                case TaskType.Executable:
+                case TaskType.CommandLine:
+                    { taskRunner = new SimpleTaskService(); break; }
+                case TaskType.PowerShell: { taskRunner = new PowerShellService(); break; }
+                case TaskType.Git:
+                    {
+                        taskRunner = new GitService();
+                        GitTask gitTask = service.GetTaskById<GitTask>(task.Id);
+                        taskRunner.Run(gitTask);
+                        return;
+                    }
+                default: { taskRunner = new SimpleTaskService(); break; }
+
+            }
+            taskRunner.Run(task);
+
         }
     }
 }
