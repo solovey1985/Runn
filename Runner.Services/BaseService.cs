@@ -15,7 +15,7 @@ namespace Runner.Services
         {
             PreRun(taskConfig);
             ProcessStartInfo info = new ProcessStartInfo();
-            info.FileName = taskConfig.PathToUtil;
+            info.FileName = taskConfig.PathToFile;
             if (!string.IsNullOrEmpty(taskConfig.PathToFile))
             {
                 info.Arguments = $"/c START {taskConfig.PathToFile}";

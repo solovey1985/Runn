@@ -20,7 +20,7 @@ namespace Runner.Services.Models
         public bool Validate()
         {
             bool result = true;
-            if (String.IsNullOrEmpty(PathToFile) || String.IsNullOrEmpty(PathToUtil))
+            if (String.IsNullOrEmpty(PathToFile))
             {
                 result = false;
             }

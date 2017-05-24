@@ -11,7 +11,7 @@ using System.Windows.Data;
 
 namespace Runner.Converters
 {
-    public class TaskToVisibilityConverter : IValueConverter
+    public class GitTaskToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -40,6 +40,35 @@ namespace Runner.Converters
         }
     }
 
+    public class ExecutableTaskToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            TaskConfig task = (TaskConfig)value;
+            switch (task.Type)
+            {
+                case TaskType.Executable:
+                case TaskType.CommandLine:
+                    {
+                        return Visibility.Visible;
+                    }
+                default:
+                    {
+                        return Visibility.Collapsed;
+                    }
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Visibility visibility = (Visibility)value;
+
+            if (visibility == Visibility.Visible)
+                return true;
+            else
+                return false;
+        }
+    }
     public class WorkflowToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
