@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Runner.Services.Models;
 
 namespace Runner.Main
 {
@@ -56,6 +57,11 @@ namespace Runner.Main
             NavigationService nav = NavigationService.GetNavigationService(this);
             var page = _container.Resolve<TasksPage>();
             nav.Navigate(page, new object());
+        }
+
+        private void RenderTasks(List<TaskConfig> tasks)
+        {
+            
         }
 
     }

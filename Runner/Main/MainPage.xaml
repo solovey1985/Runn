@@ -3,10 +3,25 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Runner.Main"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MainPage">
+    <Page.Resources>
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter 
+           Property="ScrollViewer.HorizontalScrollBarVisibility" 
+           Value="Disabled" />
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
@@ -22,15 +37,45 @@
             <Button Tag="Workflows" Click="Worfklows_Navigate">Workflows</Button>
             <Button Tag="Tasks" Click="Tasks_Navigate">Tasks</Button>
         </StackPanel>
+        
         <DockPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto" Width="Auto">
-            <Button Command="{Binding RunCommand}" DockPanel.Dock="Top" CommandParameter="{Binding ElementName=CommandsList, Path=SelectedItem}" Content="Run"/>
+         
+           <Button Command="{Binding RunCommand}" DockPanel.Dock="Top" CommandParameter="{Binding ElementName=CommandsList, Path=SelectedItem}" Content="Run"/>
             <ListBox Name="CommandsList" ItemsSource="{Binding  Configurations}" DockPanel.Dock="Bottom">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}"/>
+                    <materialDesign:Card Margin="4 4 0 0" Background="#03a9f4"
+                      Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                      Padding="0"
+                      Height="125"  
+                      Width="250">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Margin="16 16 16 4" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="{Binding Name}"/>
+                                <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}"/>
+                                <TextBlock Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignBody2TextBlock}" Text="{Binding Description}"/>
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="16 0 16 8" HorizontalAlignment="Right">
+                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Command="{Binding RunCommand}" CommandParameter="{Binding ElementName=CommandsList, Path=SelectedItem}"
+                                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 16 -20">
+                                        <materialDesign:PackIcon Kind="Bike" />
+                                    </Button>
+                                    <materialDesign:PopupBox HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolForegroundPopupBox}" Padding="2 0 2 0">
+                                        <StackPanel>
+                                            <Button Content="Run" Command="{Binding RunCommand}" CommandParameter="{Binding ElementName=CommandsList, Path=SelectedItem}"/>
+                                            <Button Content="Options"/>
+                                        </StackPanel>
+                                    </materialDesign:PopupBox>
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+         
         </DockPanel>
     </Grid>
 </Page>
