@@ -18,8 +18,6 @@ namespace Runner.ViewModels
         {
             _configService = configService;
             Configurations = _configService.ReadConfigurationFromFile("config.json");
-        
-         
         }
 
         private TaskConfig CurrentTask { get; set; }

@@ -140,7 +140,10 @@
                 </StackPanel>
                 <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Visibility="{Binding CurrentTask, Converter={StaticResource GitTaskTypeVisibilityConverter}}">
                     <Label >Enter Credentials</Label>
-                    <Button Command="{Binding CredentialsRequiredCommand}">Click to Input</Button>
+                    <Button Width="24" Height="24" Command="{Binding CredentialsRequiredCommand}" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" >
+                        <materialDesign:PackIcon Kind="Key" Height="16" Width="16"/>
+                    </Button>
+                   
                 </DockPanel>
                     
                    
