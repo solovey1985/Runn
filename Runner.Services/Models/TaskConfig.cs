@@ -19,12 +19,12 @@ namespace Runner.Services.Models
         public TaskType Type { get; set; }
         public bool Validate()
         {
-            bool result = true;
-            if (String.IsNullOrEmpty(PathToFile))
+
+            if (String.IsNullOrEmpty(PathToFile) && string.IsNullOrEmpty(Name))
             {
-                result = false;
+                return false;
             }
-            return result;
+            return true;
         }
         public bool Validate(List<TaskConfig> tasksToAdd)
         {

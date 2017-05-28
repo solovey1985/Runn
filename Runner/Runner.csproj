@@ -101,6 +101,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="1_Framework\SingleInstance.cs" />
+    <Compile Include="1_Framework\TaskToBooleanConverter.cs" />
     <Compile Include="1_Framework\VisibilityConverter.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Configuration\ConfigurationPage.xaml.cs">
@@ -119,6 +120,7 @@
     <Compile Include="Tasks\TasksPage.xaml.cs">
       <DependentUpon>TasksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\TaskViewModel.commands.cs" />
     <Compile Include="Tasks\TaskViewModel.cs" />
     <Compile Include="Workflow\WorkflowsPage.xaml.cs">
       <DependentUpon>WorkflowsPage.xaml</DependentUpon>
