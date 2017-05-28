@@ -67,12 +67,16 @@
                                             Command="{Binding RelativeSource={RelativeSource AncestorType= {x:Type ListBox}}, Path=DataContext.RunCommand}" 
                                             CommandParameter="{Binding}"
                                             HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 16 -20">
-                                        <materialDesign:PackIcon Kind="Bike" />
+                                        <materialDesign:PackIcon Kind="ChevronDoubleRight" />
                                     </Button>
                                     <materialDesign:PopupBox HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolForegroundPopupBox}" Padding="2 0 2 0">
                                         <StackPanel>
-                                            <Button Content="Run" Command="{Binding RunCommand}" CommandParameter="{Binding ElementName=CommandsList, Path=SelectedItem}"/>
-                                            <Button Content="Options"/>
+                                            <Button Content="Run" 
+                                                    Command="{Binding RelativeSource={RelativeSource AncestorType= {x:Type ListBox}}, Path=DataContext.RunCommand}" 
+                                                    CommandParameter="{Binding}"/>
+                                            <Button  Content="Edit"
+                                                     Command="{Binding RelativeSource={RelativeSource AncestorType= {x:Type ListBox}}, Path=DataContext.EditCommand}" 
+                                                     CommandParameter="{Binding}"/>
                                         </StackPanel>
                                     </materialDesign:PopupBox>
                                 </StackPanel>

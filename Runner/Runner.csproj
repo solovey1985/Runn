@@ -110,6 +110,7 @@
     <Compile Include="Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Main\MainViewModel.commands.cs" />
     <Compile Include="Main\RunCommand.cs" />
     <Compile Include="1_Framework\BaseViewModel.cs" />
     <Compile Include="Main\MainViewModel.cs" />

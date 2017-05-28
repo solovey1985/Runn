@@ -62,6 +62,8 @@
                 <ComboBox Name="cmbxTaskType" Margin="0 9 2 2"
                              VerticalAlignment="Top"
                               materialDesign:HintAssist.Hint="Type" 
+                                materialDesign:HintAssist.HintOpacity=".26"
+                                FontSize="24"
                               ItemsSource="{Binding TaskTypes}" 
                               DisplayMemberPath="Text" 
                               SelectedValuePath="Value" 
@@ -72,23 +74,22 @@
                          VerticalAlignment="Top"
                         Grid.Column="1"
                          Name="txbxName" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                          Text="{Binding CurrentTask.Name}" >
                         <materialDesign:HintAssist.Hint>
                             <StackPanel Orientation="Horizontal" Margin="0">
                                 <materialDesign:PackIcon Kind="Information" />
-                                <TextBlock>Name</TextBlock>
+                                <TextBlock FontSize="24">Name</TextBlock>
                             </StackPanel>
                         </materialDesign:HintAssist.Hint>
                     </TextBox>
                 <TextBox Grid.ColumnSpan="2" Grid.Row="1" Name="txbxDescription"
                           MinLines="2"
-                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                          
                           Text="{Binding CurrentTask.Description}">
                     <materialDesign:HintAssist.Hint>
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Information" />
-                            <TextBlock>Description</TextBlock>
+                        <TextBlock FontSize="24">Description</TextBlock>
                         </StackPanel>
                     </materialDesign:HintAssist.Hint>
                 </TextBox>

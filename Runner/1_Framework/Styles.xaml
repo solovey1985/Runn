@@ -11,5 +11,8 @@
     <Style  x:Key="ContainerStyle" TargetType="FrameworkElement">
         <Setter Property="Margin" Value="2"></Setter>
     </Style>
-    
+    <Style  BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="{x:Type TextBox}">
+        <Setter Property="FontSize" Value="24"></Setter>
+    </Style>
+
 </ResourceDictionary>
