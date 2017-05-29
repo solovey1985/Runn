@@ -1,4 +1,6 @@
-﻿using Runner.Services;
+﻿using Runner.Framework;
+using Runner.Main;
+using Runner.Services;
 using Runner.Services.Models;
 using Runner.Shared.Credentials;
 using System;
@@ -58,6 +60,11 @@ namespace Runner.Tasks
                 }
             }
             
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate()
         }
     }
 

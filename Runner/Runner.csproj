@@ -100,6 +100,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="1_Framework\NavigationHelper.cs" />
+    <Compile Include="1_Framework\RunnerContentState.cs" />
     <Compile Include="1_Framework\SingleInstance.cs" />
     <Compile Include="1_Framework\TaskToBooleanConverter.cs" />
     <Compile Include="1_Framework\VisibilityConverter.cs" />

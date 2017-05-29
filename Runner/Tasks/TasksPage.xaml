@@ -25,9 +25,14 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"></RowDefinition>
+            <RowDefinition Height="52"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+        <WrapPanel MinHeight="48" VerticalAlignment="Center">
+            <Button Style="{StaticResource MaterialDesignFlatButton}" Click="Button_Click"  VerticalAlignment="Center" MinWidth="42" MinHeight="42" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <materialDesign:PackIcon Kind="ArrowLeftBoldCircle"  Width="36" Height="36"></materialDesign:PackIcon>
+            </Button>
+        </WrapPanel>
         <WrapPanel Margin="2 0 2 0"  Grid.Column="1" Background="MintCream"  VerticalAlignment="Center" >
             <Button  Command="" CommandParameter="" Content="Cancel"/>
             <Button  Command="{Binding SaveCommand}" IsEnabled="{Binding CurrentTask, Converter={StaticResource TaskToBooleanConverter}}" CommandParameter="CurrentTask" Content="Save"/>

@@ -22,6 +22,7 @@ namespace Runner
     /// </summary>
     public partial class App : Application, ISingleInstanceApp
     {
+        NavigationHelper navigsationHelper;
 
         [STAThread]
         public static void Main()
@@ -50,10 +51,11 @@ namespace Runner
             Application.Current.MainWindow = mainWindow;
             CreateJumpList();
             mainWindow.Content = container.Resolve<MainPage>();
-            mainWindow.ShowsNavigationUI = true;
+            mainWindow.ShowsNavigationUI = false;
             Application.Current.MainWindow.Show();
         }
 
+        #region Jump List Workaround
         private void CreateJumpList()
         {
             JumpList jumpList = new JumpList();
@@ -73,8 +75,7 @@ namespace Runner
             }
             jumpList.Apply();
         }
-
-    
+            
         public bool SignalExternalCommandLineArgs(IList<string> args)
         {
             var window = MainWindow as MainWindow;
@@ -111,5 +112,7 @@ namespace Runner
             taskRunner.Run(task);
 
         }
+        
+        #endregion
     }
 }
